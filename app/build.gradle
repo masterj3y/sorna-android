@@ -1,6 +1,9 @@
 plugins {
     id 'com.android.application'
     id 'kotlin-android'
+    id 'kotlin-kapt'
+    id 'kotlin-android-extensions'
+    id 'dagger.hilt.android.plugin'
 }
 
 android {
@@ -30,15 +33,87 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
+    buildFeatures {
+        dataBinding true
+    }
 }
 
 dependencies {
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
-    implementation 'androidx.core:core-ktx:1.3.2'
-    implementation 'androidx.appcompat:appcompat:1.2.0'
-    implementation 'com.google.android.material:material:1.2.1'
+    implementation "androidx.appcompat:appcompat:$appcompat_version"
     implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
+    implementation 'androidx.dynamicanimation:dynamicanimation:1.0.0'
+    implementation 'com.google.android.material:material:1.2.1'
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+
+    implementation 'androidx.fragment:fragment-ktx:1.2.5'
+    implementation 'androidx.core:core-ktx:1.3.2'
+
+    def lifeCycle = '2.2.0'
+    implementation "androidx.lifecycle:lifecycle-runtime-ktx:$lifeCycle"
+    implementation "androidx.lifecycle:lifecycle-common-java8:$lifeCycle"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifeCycle"
+    implementation "androidx.lifecycle:lifecycle-livedata-ktx:$lifeCycle"
+
+    def viewModel = '2.2.0'
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$viewModel"
+
+    def liveData  = '2.2.0'
+    implementation "androidx.lifecycle:lifecycle-livedata-ktx:$liveData"
+
+    def firebaseMessaging = '21.0.0'
+    implementation "com.google.firebase:firebase-messaging:$firebaseMessaging"
+
+    def lottie = '2.8.0'
+    implementation "com.airbnb.android:lottie:$lottie"
+
+    def daggerVersion = '2.29.1'
+    def daggerHiltAndroidVersion = '2.29.1-alpha'
+    def daggerHiltVersion = '1.0.0-alpha02'
+    implementation "com.google.dagger:dagger:$daggerVersion"
+    implementation "com.google.dagger:hilt-android:$daggerHiltAndroidVersion"
+    implementation "com.google.dagger:hilt-android-testing:$daggerHiltAndroidVersion"
+    implementation "androidx.hilt:hilt-common:$daggerHiltVersion"
+    implementation "androidx.hilt:hilt-lifecycle-viewmodel:$daggerHiltVersion"
+    kapt "com.google.dagger:dagger-compiler:$daggerVersion"
+    kapt "com.google.dagger:hilt-android-compiler:$daggerHiltAndroidVersion"
+    kapt "androidx.hilt:hilt-compiler:$daggerHiltVersion"
+
+    def retrofit = '2.9.0'
+    implementation "com.squareup.retrofit2:retrofit:$retrofit"
+    implementation "com.squareup.retrofit2:converter-gson:$retrofit"
+    def coroutineCallAdapter = '0.9.2'
+    implementation "com.jakewharton.retrofit:retrofit2-kotlin-coroutines-adapter:$coroutineCallAdapter"
+
+    def okHttp = '4.9.0'
+    implementation "com.squareup.okhttp3:okhttp:$okHttp"
+
+    def glide = '4.11.0'
+    implementation "com.github.bumptech.glide:glide:$glide"
+    kapt "com.github.bumptech.glide:compiler:$glide"
+
+    def room = "2.2.5"
+    implementation "androidx.room:room-runtime:$room"
+    kapt "androidx.room:room-compiler:$room"
+    implementation "androidx.room:room-ktx:$room"
+    testImplementation "androidx.room:room-testing:$room"
+
+    def fragNavController = '3.2.0'
+    implementation "com.ncapdevi:frag-nav:$fragNavController"
+
+    def itemAnimator = '3.0.0'
+    implementation "jp.wasabeef:recyclerview-animators:$itemAnimator"
+
+    def bubbleShowCase = '1.3.1'
+    implementation "com.elconfidencial.bubbleshowcase:bubbleshowcase:$bubbleShowCase"
+
+    def circleIndicator = '2.1.4'
+    implementation "me.relex:circleindicator:$circleIndicator"
+
+    def leakCanary = '2.4'
+    debugImplementation "com.squareup.leakcanary:leakcanary-android:$leakCanary"
+
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
