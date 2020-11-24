@@ -2,15 +2,18 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="io.github.masterj3y.sorna">
 
+    <uses-permission android:name="android.permission.INTERNET"/>
+
     <application
+        android:name=".core.AppBase"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:name=".core.AppBase"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Sorna">
-        <activity android:name=".MainActivity">
+        <activity android:name=".feature.auth.AuthActivity"/>
+        <activity android:name=".feature.main.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

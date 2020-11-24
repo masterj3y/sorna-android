@@ -7,7 +7,16 @@ import androidx.core.content.edit
 class SharedPref(context: Context) {
 
     private val preferences: SharedPreferences =
-        context.getSharedPreferences("pref", Context.MODE_PRIVATE)
+            context.getSharedPreferences("pref", Context.MODE_PRIVATE)
+
+    val isLoggedIn: Boolean
+        get() = accessToken.isNotEmpty()
+
+    var accessToken: String
+        get() = preferences.getString(ACCESS_TOKEN, "") ?: ""
+        set(value) {
+            put(ACCESS_TOKEN to value)
+        }
 
     private fun <T> put(data: Pair<String, T>) {
         when (data.second) {
@@ -23,6 +32,6 @@ class SharedPref(context: Context) {
         preferences.edit { action() }
 
     companion object {
-
+        private const val ACCESS_TOKEN = "at"
     }
 }

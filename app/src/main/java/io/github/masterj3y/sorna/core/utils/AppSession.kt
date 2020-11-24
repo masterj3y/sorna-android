@@ -4,26 +4,17 @@ import javax.inject.Inject
 
 class AppSession @Inject constructor(private val sharedPref: SharedPref) {
 
-    var nightModeEnabled: Boolean
-        get() = sharedPref.nightModeEnabled
-        set(value) {
-            sharedPref.nightModeEnabled = value
-        }
+    val isLoggedIn: Boolean
+        get() = sharedPref.isLoggedIn
 
-    var downloadFabPositionX: Int
-        get() = sharedPref.downloadFabPositionX
-        set(value) {
-            sharedPref.downloadFabPositionX = value
-        }
+    val accessToken: String
+        get() = sharedPref.accessToken
 
-    var downloadFabPositionY: Int
-        get() = sharedPref.downloadFabPositionY
-        set(value) {
-            sharedPref.downloadFabPositionY = value
-        }
+    fun login(accessToken: String) {
+        sharedPref.accessToken = accessToken
+    }
 
-    companion object {
-        const val GUIDE_ENABLE_TAP_TO_DOWNLOAD = "GUIDE_ENABLE_TAP_TO_DOWNLOAD"
-        const val GUIDE_SETTINGS = "GUIDE_SETTINGS"
+    fun logout() {
+        sharedPref.accessToken = ""
     }
 }
