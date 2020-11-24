@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">Sorna</string>
+    <string name="tab_user_profile">Profile</string>
+    <string name="tab_user_ads">My Ads</string>
+    <string name="tab_create_new_ad">Create Ad</string>
+    <string name="tab_categories">Categories</string>
+    <string name="tab_ads">Ads</string>
 </resources>

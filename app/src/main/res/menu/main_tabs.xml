@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/mainTabUserProfile"
+        android:enabled="true"
+        android:icon="@drawable/ic_baseline_person_24"
+        android:title="@string/tab_user_profile" />
+
+    <item
+        android:id="@+id/mainTabUserAds"
+        android:enabled="true"
+        android:icon="@drawable/ic_baseline_folder_shared_24"
+        android:title="@string/tab_user_ads" />
+
+    <item
+        android:id="@+id/mainTabCreateNewAd"
+        android:enabled="true"
+        android:icon="@drawable/ic_baseline_post_add_24"
+        android:title="@string/tab_create_new_ad" />
+
+    <item
+        android:id="@+id/mainTabCategories"
+        android:enabled="true"
+        android:icon="@drawable/ic_baseline_folder_24"
+        android:title="@string/tab_categories" />
+
+    <item
+        android:id="@+id/mainTabAds"
+        android:enabled="true"
+        android:icon="@drawable/ic_baseline_receipt_24"
+        android:title="@string/tab_ads" />
+</menu>
