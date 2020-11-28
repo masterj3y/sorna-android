@@ -4,7 +4,10 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ApplicationComponent
+import io.github.masterj3y.sorna.core.utils.AppSession
+import io.github.masterj3y.sorna.feature.auth.AuthInterceptor
 import io.github.masterj3y.sorna.feature.auth.AuthService
+import io.github.masterj3y.sorna.feature.categories.CategoriesService
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -15,6 +18,11 @@ import javax.inject.Singleton
 @Module
 @InstallIn(ApplicationComponent::class)
 object NetworkModule {
+
+    @Provides
+    @Singleton
+    fun provideCategoriesService(retrofit: Retrofit): CategoriesService =
+            retrofit.create(CategoriesService::class.java)
 
     @Provides
     @Singleton
@@ -32,9 +40,9 @@ object NetworkModule {
 
     @Provides
     @Singleton
-    fun okHttpClient(): OkHttpClient {
+    fun okHttpClient(appSession: AppSession): OkHttpClient {
         return OkHttpClient().newBuilder()
-            .connectTimeout(15, TimeUnit.SECONDS)
-            .build()
+                .addInterceptor(AuthInterceptor(appSession))
+                .build()
     }
 }

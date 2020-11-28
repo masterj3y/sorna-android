@@ -18,7 +18,6 @@ class AuthViewModel @ViewModelInject constructor(
     val loading = MutableLiveData(false)
     val error = MutableLiveData("")
 
-    @InternalCoroutinesApi
     @ExperimentalCoroutinesApi
     val isSignedIn: LiveData<Boolean> = googleIdToken.switchMap {
         loading()

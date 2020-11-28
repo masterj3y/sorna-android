@@ -16,7 +16,6 @@ import io.github.masterj3y.sorna.core.platform.BaseActivity
 import io.github.masterj3y.sorna.databinding.ActivityAuthBinding
 import io.github.masterj3y.sorna.feature.main.MainActivity
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.InternalCoroutinesApi
 
 @AndroidEntryPoint
 class AuthActivity : BaseActivity<ActivityAuthBinding>() {
@@ -52,7 +51,6 @@ class AuthActivity : BaseActivity<ActivityAuthBinding>() {
     private fun onAccountLoaded(account: GoogleSignInAccount) =
             account.idToken?.let { viewModel.signIn(it) }
 
-    @InternalCoroutinesApi
     @ExperimentalCoroutinesApi
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -65,7 +63,6 @@ class AuthActivity : BaseActivity<ActivityAuthBinding>() {
         subscribeObservers()
     }
 
-    @InternalCoroutinesApi
     @ExperimentalCoroutinesApi
     private fun subscribeObservers() {
         viewModel.isSignedIn.observe(this, ::onSignedIn)
