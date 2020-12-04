@@ -15,6 +15,7 @@ abstract class CacheNetworkBoundRepository<RESULT, REQUEST>(
 
     fun asFlow() = flow {
 
+        emit(fetchFromLocal().first())
         val apiResponse = fetchFromRemote()
         val remoteData = apiResponse.body()
         if (apiResponse.isSuccessful && remoteData != null) {

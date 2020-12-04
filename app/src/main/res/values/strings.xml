@@ -5,4 +5,25 @@
     <string name="tab_create_new_ad">Create Ad</string>
     <string name="tab_categories">Categories</string>
     <string name="tab_ads">Ads</string>
+    <string name="select_category">انتخاب دسته‌بندی</string>
+    <string name="create_new_ad_title">عنوان آگهی</string>
+    <string name="create_new_ad_description">توضیحات آگهی</string>
+    <string name="create_new_ad_phone_number">شماره تماس</string>
+    <string name="create_new_ad_images_limit">بیشتر از %1$d عکس نمیتوانید انتخاب کنید</string>
+    <string name="create_new_ad_folder_title">آلبوم</string>
+    <string name="create_new_ad_directory_name">تصاویر</string>
+    <string name="create_new_ad_title_validation_error">عنوان آگهی حداقل باید شامل %1$d نویسه باشد</string>
+    <string name="create_new_ad_description_validation_error">توضیحات آگهی حداقل باید شامل %1$d نویسه باشد</string>
+    <string name="create_new_ad_phoneNumber_validation_error">شماره تلفن همراه صحیح نیست(مثال: 09371231234)</string>
+    <string name="create_new_ad_price_validation_error">قیمت محصول حداقل باید 100 باشد</string>
+    <string name="create_new_ad_category_validation_error">برای آگهی خود یک دسته بندی انتخاب کنید</string>
+    <string name="storage_permission_title">انتخاب تصاویر آگهی</string>
+    <string name="storage_permission_message">برای انتخاب تصاویر مجوز دسترسی به حافظه گوشی الزامی است.</string>
+    <string name="storage_permission_grant">اعطای دسترسی</string>
+    <string name="storage_permission_deny">بیخیال</string>
+    <string name="create_new_ad_post_button">ارسال</string>
+    <string name="create_new_ad_posting_ad">در حال ارسال آگهی، لطفا صبر کنید</string>
+    <string name="create_new_ad_successful">آگهی با موفقیت ارسال شد</string>
+    <string name="create_new_ad_failed">ارسال آگهی با خطا مواجه شد، لطفا دوباره تلاش کنید</string>
+    <string name="create_new_ad_price">قیمت</string>
 </resources>

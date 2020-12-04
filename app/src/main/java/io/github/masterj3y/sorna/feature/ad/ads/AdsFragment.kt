@@ -1,4 +1,4 @@
-package io.github.masterj3y.sorna.feature.ads
+package io.github.masterj3y.sorna.feature.ad.ads
 
 import dagger.hilt.android.AndroidEntryPoint
 import io.github.masterj3y.sorna.R

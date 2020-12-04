@@ -23,4 +23,6 @@ class CategoriesRepository(private val service: CategoriesService, private val a
         override suspend fun fetchFromRemote(): Response<List<Category>> =
                 service.fetchAll()
     }.asFlow()
+
+    fun getCachedCategories(): Flow<List<Category>> = dao.findAll()
 }

@@ -1,5 +1,6 @@
 package io.github.masterj3y.sorna.core.binding
 
+import android.net.Uri
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
@@ -8,6 +9,7 @@ import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import io.github.masterj3y.sorna.core.extension.loadCircularFromUrl
+import io.github.masterj3y.sorna.core.extension.loadFromUri
 import io.github.masterj3y.sorna.core.extension.loadFromUrl
 
 @BindingAdapter("android:loadImageFromUrl")
@@ -18,6 +20,11 @@ fun loadImageFromUrl(view: ImageView, url: String?) {
 @BindingAdapter("android:loadCircularImageFromUrl")
 fun loadCircularImageFromUrl(view: ImageView, url: String?) {
     url?.let { view.loadCircularFromUrl(it) }
+}
+
+@BindingAdapter("android:loadImageFromUri")
+fun loadCircularImageFromUri(view: ImageView, url: Uri?) {
+    url?.let { view.loadFromUri(it) }
 }
 
 @BindingAdapter("android:bindDrawableStart")

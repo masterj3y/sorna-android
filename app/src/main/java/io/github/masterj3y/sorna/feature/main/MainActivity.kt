@@ -13,11 +13,11 @@ import io.github.masterj3y.sorna.core.platform.BaseActivity
 import io.github.masterj3y.sorna.core.platform.BaseFragment
 import io.github.masterj3y.sorna.core.utils.AppSession
 import io.github.masterj3y.sorna.databinding.ActivityMainBinding
-import io.github.masterj3y.sorna.feature.ads.AdsFragment
+import io.github.masterj3y.sorna.feature.ad.ads.AdsFragment
+import io.github.masterj3y.sorna.feature.ad.create.CreateNewAdFragment
+import io.github.masterj3y.sorna.feature.ad.user_ads.UserAdsFragment
 import io.github.masterj3y.sorna.feature.auth.AuthActivity
 import io.github.masterj3y.sorna.feature.categories.CategoriesFragment
-import io.github.masterj3y.sorna.feature.create_new_ad.CreateNewAdFragment
-import io.github.masterj3y.sorna.feature.user_ads.UserAdsFragment
 import io.github.masterj3y.sorna.feature.user_profile.UserProfileFragment
 import javax.inject.Inject
 
