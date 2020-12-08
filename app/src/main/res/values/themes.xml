@@ -24,4 +24,8 @@
         <item name="android:windowFrame">@null</item>
         <item name="android:windowIsFloating">true</item>
     </style>
+
+    <style name="AdImageLayout">
+        <item name="android:background">@color/LightBlue_700</item>
+    </style>
 </resources>

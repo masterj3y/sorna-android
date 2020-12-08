@@ -10,7 +10,7 @@ import io.github.masterj3y.sorna.feature.auth.AuthRepository
 import io.github.masterj3y.sorna.feature.auth.AuthService
 import io.github.masterj3y.sorna.feature.categories.CategoriesRepository
 import io.github.masterj3y.sorna.feature.categories.CategoriesService
-import io.github.masterj3y.sorna.feature.ad.AdRepository
+import io.github.masterj3y.sorna.feature.ad.AdsRepository
 import javax.inject.Singleton
 
 @Module
@@ -19,8 +19,8 @@ object RepositoryModule {
 
     @Singleton
     @Provides
-    fun provideCreateNewAdRepository(adService: AdService): AdRepository =
-            AdRepository(adService)
+    fun provideCreateNewAdRepository(adService: AdService,appDatabase: AppDatabase): AdsRepository =
+            AdsRepository(adService, appDatabase)
 
     @Singleton
     @Provides

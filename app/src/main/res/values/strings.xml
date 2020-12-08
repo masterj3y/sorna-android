@@ -26,4 +26,11 @@
     <string name="create_new_ad_successful">آگهی با موفقیت ارسال شد</string>
     <string name="create_new_ad_failed">ارسال آگهی با خطا مواجه شد، لطفا دوباره تلاش کنید</string>
     <string name="create_new_ad_price">قیمت</string>
+    <string name="time_to_moment_now">همین الآن</string>
+    <string name="time_to_moment_one_minute_ago">یک دقیقه پیش</string>
+    <string name="time_to_moment_some_minutes_ago">%1$d دقیقه</string>
+    <string name="time_to_moment_one_hour_ago">یک ساعت پیش</string>
+    <string name="time_to_moment_some_hours_ago">%1$d ساعت پیش</string>
+    <string name="time_to_moment_yesterday">دیروز</string>
+    <string name="time_to_moment_some_days_ago">%1$d روز پیش</string>
 </resources>

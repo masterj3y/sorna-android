@@ -5,7 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import io.github.masterj3y.sorna.core.platform.BaseViewModel
-import io.github.masterj3y.sorna.feature.ad.AdRepository
+import io.github.masterj3y.sorna.feature.ad.AdsRepository
 import io.github.masterj3y.sorna.feature.categories.CategoriesRepository
 import io.github.masterj3y.sorna.feature.categories.Category
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -19,8 +19,8 @@ import java.io.File
 
 
 class CreateNewAdViewModel @ViewModelInject constructor(
-        private val adRepository: AdRepository,
-        private val categoryRepository: CategoriesRepository
+    private val adsRepository: AdsRepository,
+    private val categoryRepository: CategoriesRepository
 ) : BaseViewModel() {
 
     @ExperimentalCoroutinesApi
@@ -63,7 +63,7 @@ class CreateNewAdViewModel @ViewModelInject constructor(
                 posting()
                 posted(false)
                 failed(false)
-                adRepository.postAd(
+                adsRepository.postAd(
                         onSuccess = {
                             isAdPosted.value = true
                             posting(false)

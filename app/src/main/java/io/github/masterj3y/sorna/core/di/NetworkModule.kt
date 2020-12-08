@@ -19,6 +19,8 @@ import javax.inject.Singleton
 @InstallIn(ApplicationComponent::class)
 object NetworkModule {
 
+    const val BASE_URL = "http://192.168.1.101:8080/"
+
     @Provides
     @Singleton
     fun provideCategoriesService(retrofit: Retrofit): CategoriesService =
@@ -38,7 +40,7 @@ object NetworkModule {
     @Singleton
     fun retrofit(okHttpClient: OkHttpClient): Retrofit {
         return Retrofit.Builder().client(okHttpClient)
-                .baseUrl("http://192.168.1.105:8080/")
+                .baseUrl(BASE_URL)
                 .addConverterFactory(ScalarsConverterFactory.create())
                 .addConverterFactory(GsonConverterFactory.create()).build()
     }

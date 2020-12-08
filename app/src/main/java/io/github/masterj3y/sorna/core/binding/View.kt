@@ -7,6 +7,7 @@ import android.widget.TextView
 import androidx.annotation.DrawableRes
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import io.github.masterj3y.sorna.core.extension.loadCircularFromUrl
 import io.github.masterj3y.sorna.core.extension.loadFromUri
@@ -60,4 +61,9 @@ fun attachToRecyclerView(view: FloatingActionButton, recyclerView: RecyclerView)
                 view.show()
         }
     })
+}
+
+@BindingAdapter("android:refreshing")
+fun swipeRefreshLayoutRefreshing(view: SwipeRefreshLayout, isRefreshing: Boolean?) {
+    view.isRefreshing = isRefreshing ?: false
 }
