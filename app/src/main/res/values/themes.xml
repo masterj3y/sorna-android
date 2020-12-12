@@ -1,6 +1,6 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Theme.Sorna" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+    <style name="Theme.Sorna" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/purple_500</item>
         <item name="colorPrimaryVariant">@color/purple_700</item>
@@ -27,5 +27,9 @@
 
     <style name="AdImageLayout">
         <item name="android:background">@color/LightBlue_700</item>
+    </style>
+
+    <style name="AdPictureFade">
+        <item name="android:background">@drawable/shape_ad_picture_pager_fade</item>
     </style>
 </resources>

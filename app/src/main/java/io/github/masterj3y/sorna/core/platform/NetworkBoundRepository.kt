@@ -8,8 +8,8 @@ import retrofit2.Response
 
 @ExperimentalCoroutinesApi
 abstract class NetworkBoundRepository<REQUEST>(
-    private val onSuccess: () -> Unit,
-    private val onError: (String) -> Unit
+        private val onSuccess: suspend () -> Unit,
+        private val onError: suspend (String) -> Unit
 ) {
 
     fun asFlow() = flow<REQUEST> {
@@ -17,8 +17,8 @@ abstract class NetworkBoundRepository<REQUEST>(
         val apiResponse = fetchFromRemote()
         val body = apiResponse.body()
         if (apiResponse.isSuccessful && body != null) {
-            emit(body)
             onSuccess()
+            emit(body)
         } else {
             onError(apiResponse.message())
         }

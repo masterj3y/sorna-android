@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="io.github.masterj3y.sorna">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
@@ -14,7 +14,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Sorna">
-        <activity android:name=".feature.auth.AuthActivity"/>
+        <activity android:name=".feature.ad.details.AdDetailsActivity"></activity>
+        <activity android:name=".feature.auth.AuthActivity" />
         <activity android:name=".feature.main.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

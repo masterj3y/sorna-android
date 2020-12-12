@@ -2,7 +2,7 @@ package io.github.masterj3y.sorna.feature.ad
 
 import io.github.masterj3y.sorna.core.database.AppDatabase
 import io.github.masterj3y.sorna.core.platform.CacheNetworkBoundRepository
-import io.github.masterj3y.sorna.feature.ad.user_ads.AdsDao
+import io.github.masterj3y.sorna.core.platform.NetworkBoundRepository
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.*
 import okhttp3.MultipartBody
@@ -47,7 +47,7 @@ class AdsRepository(private val service: AdService, private val appDatabase: App
     }
 
     @ExperimentalCoroutinesApi
-    suspend fun getAllAds(
+    fun getAllAds(
             onSuccess: () -> Unit,
             onError: (String) -> Unit
     ): Flow<List<Ad>> =
@@ -62,14 +62,24 @@ class AdsRepository(private val service: AdService, private val appDatabase: App
             }.asFlow()
 
     @ExperimentalCoroutinesApi
-    private fun fetchAdsFromLocal(): Flow<List<Ad>> = flow {
-        val ads = adsDao.findAll().first()
-        for (i in ads.indices) {
-            val adId = ads[i].id
-            val adPictures = adPicturesDao.findAllByAdId(adId).first()
-            ads[i].pics = adPictures
+    fun getAdById(adId: String): Flow<Ad> = flow {
+        val adFlow = adsDao.findById(adId).onEach {
+            val adPictures = adPicturesDao.findAllByAdId(it.id).first()
+            it.pics = adPictures
         }
-        emit(ads)
+        emitAll(adFlow)
+    }
+
+    @ExperimentalCoroutinesApi
+    private fun fetchAdsFromLocal(): Flow<List<Ad>> = flow {
+        val adsFlow = adsDao.findAll().onEach { ads ->
+            ads.forEach {
+                val adId = it.id
+                val adPictures = adPicturesDao.findAllByAdId(adId).first()
+                it.pics = adPictures
+            }
+        }
+        emitAll(adsFlow)
     }
 
     suspend fun saveAdsInDB(ads: List<Ad>) {
@@ -80,5 +90,31 @@ class AdsRepository(private val service: AdService, private val appDatabase: App
             }
         }
         adsDao.insert(*ads.toTypedArray())
+    }
+
+    @ExperimentalCoroutinesApi
+    suspend fun save(adId: String, onSuccess: suspend () -> Unit, onError: suspend (String) -> Unit) {
+        object : NetworkBoundRepository<String>(
+                onSuccess = {
+                    adsDao.save(adId)
+                    onSuccess()
+                },
+                onError = onError
+        ) {
+            override suspend fun fetchFromRemote(): Response<String> = service.save(adId)
+        }.asFlow().first()
+    }
+
+    @ExperimentalCoroutinesApi
+    suspend fun waste(adId: String, onSuccess: suspend () -> Unit, onError: suspend (String) -> Unit) {
+        object : NetworkBoundRepository<String>(
+                onSuccess = {
+                    adsDao.waste(adId)
+                    onSuccess()
+                },
+                onError = onError
+        ) {
+            override suspend fun fetchFromRemote(): Response<String> = service.waste(adId)
+        }.asFlow().first()
     }
 }

@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="adapter"
+            type="io.github.masterj3y.sorna.feature.ad.details.AdPicturesPagerAdapter" />
+
+        <variable
+            name="viewModel"
+            type="io.github.masterj3y.sorna.feature.ad.details.AdDetailsViewModel" />
+    </data>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".feature.ad.details.AdDetailsActivity">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <com.google.android.material.appbar.AppBarLayout
+                android:layout_width="match_parent"
+                android:layout_height="?android:attr/actionBarSize">
+
+                <com.google.android.material.appbar.MaterialToolbar
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:contentInsetStart="0dp">
+
+                    <FrameLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:paddingStart="16dp"
+                            android:paddingEnd="16dp">
+
+                            <com.google.android.material.textview.MaterialTextView
+                                android:id="@+id/title"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:ellipsize="end"
+                                android:maxLines="1"
+                                android:text="@{viewModel.ad.title}"
+                                app:layout_constraintEnd_toStartOf="@id/save"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent"
+                                tools:text="Title" />
+
+                            <com.google.android.material.textview.MaterialTextView
+                                android:id="@+id/createdAt"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:textTimeToMoment="@{viewModel.ad.createdAt}"
+                                app:layout_constraintEnd_toStartOf="@id/save"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toBottomOf="@id/title"
+                                tools:text="created at" />
+
+                            <androidx.appcompat.widget.AppCompatImageView
+                                android:id="@+id/waste"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:invisible="@{!viewModel.ad.saved}"
+                                android:padding="4dp"
+                                android:src="@drawable/ic_baseline_bookmark_24"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+                            <androidx.appcompat.widget.AppCompatImageView
+                                android:id="@+id/save"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:invisible="@{viewModel.ad.saved}"
+                                android:padding="4dp"
+                                android:src="@drawable/ic_baseline_bookmark_border_24"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+                            <ProgressBar
+                                android:layout_width="24dp"
+                                android:layout_height="24dp"
+                                android:gone="@{!viewModel.saveProgress}"
+                                app:layout_constraintBottom_toBottomOf="@id/save"
+                                app:layout_constraintEnd_toEndOf="@id/save"
+                                app:layout_constraintStart_toStartOf="@id/save"
+                                app:layout_constraintTop_toTopOf="@id/save" />
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+                    </FrameLayout>
+                </com.google.android.material.appbar.MaterialToolbar>
+            </com.google.android.material.appbar.AppBarLayout>
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="240dp">
+
+                <androidx.viewpager2.widget.ViewPager2
+                    android:layout_width="match_parent"
+                    android:layout_height="240dp"
+                    android:adapter="@{adapter}"
+                    android:background="#730707"
+                    android:bindAdPicturesList="@{viewModel.ad.pics}" />
+
+                <View
+                    style="@style/AdPictureFade"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:layout_gravity="bottom" />
+            </FrameLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="-64dp"
+                android:layout_marginEnd="16dp">
+
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/detailsCard"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="32dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="32dp"
+                        android:layout_marginBottom="40dp"
+                        android:orientation="vertical"
+                        android:padding="16dp">
+
+                        <com.google.android.material.textview.MaterialTextView
+                            android:id="@+id/description"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@{viewModel.ad.description}"
+                            tools:text="Description" />
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
+
+                <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:textCurrencyFormat="@{viewModel.ad.price}"
+                    app:icon="@drawable/ic_baseline_monetization_on_24"
+                    app:layout_constraintBottom_toTopOf="@id/detailsCard"
+                    app:layout_constraintStart_toStartOf="@id/detailsCard"
+                    app:layout_constraintTop_toTopOf="@id/detailsCard"
+                    tools:text="2,000,000" />
+
+                <com.google.android.material.floatingactionbutton.FloatingActionButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="16dp"
+                    android:onClick="onCallClicked"
+                    android:src="@drawable/ic_baseline_call_24"
+                    app:layout_constraintBottom_toTopOf="@id/detailsCard"
+                    app:layout_constraintEnd_toEndOf="@id/detailsCard"
+                    app:layout_constraintTop_toTopOf="@id/detailsCard" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </LinearLayout>
+    </ScrollView>
+</layout>

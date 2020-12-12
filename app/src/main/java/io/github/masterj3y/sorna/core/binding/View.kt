@@ -8,10 +8,12 @@ import androidx.annotation.DrawableRes
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import io.github.masterj3y.sorna.core.extension.loadCircularFromUrl
 import io.github.masterj3y.sorna.core.extension.loadFromUri
 import io.github.masterj3y.sorna.core.extension.loadFromUrl
+import java.text.DecimalFormat
 
 @BindingAdapter("android:loadImageFromUrl")
 fun loadImageFromUrl(view: ImageView, url: String?) {
@@ -50,6 +52,11 @@ fun bindAdapter(view: RecyclerView, adapter: RecyclerView.Adapter<*>) {
     view.adapter = adapter
 }
 
+@BindingAdapter("android:adapter")
+fun bindViewPagerAdapter(view: ViewPager2, adapter: RecyclerView.Adapter<*>) {
+    view.adapter = adapter
+}
+
 @BindingAdapter("android:attachToRecyclerView")
 fun attachToRecyclerView(view: FloatingActionButton, recyclerView: RecyclerView) {
     recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
@@ -66,4 +73,12 @@ fun attachToRecyclerView(view: FloatingActionButton, recyclerView: RecyclerView)
 @BindingAdapter("android:refreshing")
 fun swipeRefreshLayoutRefreshing(view: SwipeRefreshLayout, isRefreshing: Boolean?) {
     view.isRefreshing = isRefreshing ?: false
+}
+
+@BindingAdapter("android:textCurrencyFormat")
+fun formatCurrency(view: TextView, amount: Long?) = with(view) {
+    amount?.let {
+        val formatter = DecimalFormat("###,###,###")
+        text = formatter.format(it.toDouble())
+    }
 }

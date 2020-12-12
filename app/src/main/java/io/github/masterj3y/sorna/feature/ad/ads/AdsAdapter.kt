@@ -14,7 +14,7 @@ import io.github.masterj3y.sorna.databinding.ItemAdBinding
 import io.github.masterj3y.sorna.feature.ad.Ad
 import io.github.masterj3y.sorna.feature.ad.AdPicture
 
-class AdsAdapter() : RecyclerView.Adapter<AdsAdapter.AdsViewHolder>() {
+class AdsAdapter(private val listener: OnItemClickedListener) : RecyclerView.Adapter<AdsAdapter.AdsViewHolder>() {
 
     private val differ = AsyncListDiffer(this, DiffCallBack<Ad>())
 
@@ -36,7 +36,14 @@ class AdsAdapter() : RecyclerView.Adapter<AdsAdapter.AdsViewHolder>() {
 
         fun render(item: Ad) = with(binding) {
             ad = item
+            root.setOnClickListener { listener.onItemClicked(getItem()) }
         }
+
+        private fun getItem() = differ.currentList[adapterPosition]
+    }
+
+    fun interface OnItemClickedListener {
+        fun onItemClicked(item: Ad)
     }
 }
 
@@ -44,12 +51,14 @@ class AdsAdapter() : RecyclerView.Adapter<AdsAdapter.AdsViewHolder>() {
 fun loadAdFirstPic(view: ImageView, pics: List<AdPicture>?) = with(view) {
     pics?.let {
         if (it.isNotEmpty()) {
-            val picUrl = NetworkModule.BASE_URL + it[0].picUrl.replace("\\", "/")
+            val picUrl = it[0].picUrl.absolutePicUrl()
             loadFromUrl(picUrl)
             println(picUrl)
         }
     }
 }
+
+fun String.absolutePicUrl() =NetworkModule.BASE_URL + replace("\\", "/")
 
 @BindingAdapter("android:bindAdsList")
 fun bindAdsList(view: RecyclerView, list: List<Ad>?) {
