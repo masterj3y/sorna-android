@@ -1,9 +1,9 @@
 <resources>
     <string name="app_name">Sorna</string>
     <string name="tab_user_profile">Profile</string>
-    <string name="tab_user_ads">My Ads</string>
-    <string name="tab_create_new_ad">Create Ad</string>
     <string name="tab_categories">Categories</string>
+    <string name="tab_create_new_ad">Create Ad</string>
+    <string name="tab_search_ads">Search</string>
     <string name="tab_ads">Ads</string>
     <string name="select_category">انتخاب دسته‌بندی</string>
     <string name="create_new_ad_title">عنوان آگهی</string>

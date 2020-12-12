@@ -15,6 +15,7 @@ import io.github.masterj3y.sorna.core.utils.AppSession
 import io.github.masterj3y.sorna.databinding.ActivityMainBinding
 import io.github.masterj3y.sorna.feature.ad.ads.AdsFragment
 import io.github.masterj3y.sorna.feature.ad.create.CreateNewAdFragment
+import io.github.masterj3y.sorna.feature.ad.search.SearchAdsFragment
 import io.github.masterj3y.sorna.feature.ad.user_ads.UserAdsFragment
 import io.github.masterj3y.sorna.feature.auth.AuthActivity
 import io.github.masterj3y.sorna.feature.categories.CategoriesFragment
@@ -47,9 +48,9 @@ class MainActivity : BaseActivity<ActivityMainBinding>(), BaseFragment.FragmentN
     private fun initFragNavController(savedInstanceState: Bundle?) = with(binding) {
         val fragments = listOf(
                 UserProfileFragment(),
-                UserAdsFragment(),
-                CreateNewAdFragment(),
                 CategoriesFragment(),
+                CreateNewAdFragment(),
+                SearchAdsFragment(),
                 AdsFragment()
         )
 
@@ -67,9 +68,9 @@ class MainActivity : BaseActivity<ActivityMainBinding>(), BaseFragment.FragmentN
         bottomNavigation.setOnNavigationItemSelectedListener {
             when (it.itemId) {
                 R.id.mainTabUserProfile -> selectTab(TAB_USER_PROFILE)
-                R.id.mainTabUserAds -> selectTab(TAB_USER_ADS)
-                R.id.mainTabCreateNewAd -> selectTab(TAB_CREATE_NEW_AD)
                 R.id.mainTabCategories -> selectTab(TAB_CATEGORIES)
+                R.id.mainTabCreateNewAd -> selectTab(TAB_CREATE_NEW_AD)
+                R.id.mainTabSearchAds -> selectTab(TAB_SEARCH_ADS)
                 R.id.mainTabAds -> selectTab(TAB_ADS)
                 else -> false
             }
@@ -97,16 +98,16 @@ class MainActivity : BaseActivity<ActivityMainBinding>(), BaseFragment.FragmentN
     companion object {
 
         private const val TAB_USER_PROFILE = FragNavController.TAB1
-        private const val TAB_USER_ADS = FragNavController.TAB2
+        private const val TAB_CATEGORIES = FragNavController.TAB2
         private const val TAB_CREATE_NEW_AD = FragNavController.TAB3
-        private const val TAB_CATEGORIES = FragNavController.TAB4
+        private const val TAB_SEARCH_ADS = FragNavController.TAB4
         private const val TAB_ADS = FragNavController.TAB5
 
         private val tabs: HashMap<Int, Int> = hashMapOf(
                 TAB_USER_PROFILE to R.id.mainTabUserProfile,
-                TAB_USER_ADS to R.id.mainTabUserAds,
-                TAB_CREATE_NEW_AD to R.id.mainTabCreateNewAd,
                 TAB_CATEGORIES to R.id.mainTabCategories,
+                TAB_CREATE_NEW_AD to R.id.mainTabCreateNewAd,
+                TAB_SEARCH_ADS to R.id.mainTabSearchAds,
                 TAB_ADS to R.id.mainTabAds
         )
 

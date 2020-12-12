@@ -7,11 +7,12 @@
         android:icon="@drawable/ic_baseline_person_24"
         android:title="@string/tab_user_profile" />
 
+
     <item
-        android:id="@+id/mainTabUserAds"
+        android:id="@+id/mainTabCategories"
         android:enabled="true"
-        android:icon="@drawable/ic_baseline_folder_shared_24"
-        android:title="@string/tab_user_ads" />
+        android:icon="@drawable/ic_baseline_folder_24"
+        android:title="@string/tab_categories" />
 
     <item
         android:id="@+id/mainTabCreateNewAd"
@@ -20,10 +21,10 @@
         android:title="@string/tab_create_new_ad" />
 
     <item
-        android:id="@+id/mainTabCategories"
+        android:id="@+id/mainTabSearchAds"
         android:enabled="true"
-        android:icon="@drawable/ic_baseline_folder_24"
-        android:title="@string/tab_categories" />
+        android:icon="@drawable/ic_baseline_search_24"
+        android:title="@string/tab_search_ads" />
 
     <item
         android:id="@+id/mainTabAds"
