@@ -71,6 +71,12 @@ class AdsRepository(private val service: AdService, private val appDatabase: App
     }
 
     @ExperimentalCoroutinesApi
+    fun searchAds(keyword: String, onSuccess: suspend () -> Unit, onError: suspend (String) -> Unit): Flow<List<Ad>> =
+        object : NetworkBoundRepository<List<Ad>>(onSuccess, onError) {
+            override suspend fun fetchFromRemote(): Response<List<Ad>> = service.searchAds(keyword)
+        }.asFlow()
+
+    @ExperimentalCoroutinesApi
     private fun fetchAdsFromLocal(): Flow<List<Ad>> = flow {
         val adsFlow = adsDao.findAll().onEach { ads ->
             ads.forEach {

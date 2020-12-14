@@ -33,4 +33,5 @@
     <string name="time_to_moment_some_hours_ago">%1$d ساعت پیش</string>
     <string name="time_to_moment_yesterday">دیروز</string>
     <string name="time_to_moment_some_days_ago">%1$d روز پیش</string>
+    <string name="search_ads_input_hint">جستجوی آگهی</string>
 </resources>
