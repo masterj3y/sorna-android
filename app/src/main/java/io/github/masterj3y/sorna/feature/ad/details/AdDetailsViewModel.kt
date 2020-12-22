@@ -1,10 +1,12 @@
 package io.github.masterj3y.sorna.feature.ad.details
 
+import android.view.View
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.switchMap
 import androidx.lifecycle.viewModelScope
+import io.github.masterj3y.sorna.core.extension.call
 import io.github.masterj3y.sorna.core.platform.BaseViewModel
 import io.github.masterj3y.sorna.feature.ad.Ad
 import io.github.masterj3y.sorna.feature.ad.AdsRepository
@@ -41,6 +43,10 @@ class AdDetailsViewModel @ViewModelInject constructor(private val repository: Ad
         viewModelScope.launch {
             repository.waste(adId, onSuccess = { saved(false) }, onError = ::error)
         }
+    }
+
+    fun call(view: View?, phoneNumber: String) {
+        view?.context?.call(phoneNumber)
     }
 
     private fun saveProgress(isProgressing: Boolean = true) {

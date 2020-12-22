@@ -1,6 +1,7 @@
 package io.github.masterj3y.sorna.feature.ad.create
 
 import android.view.View
+import android.widget.EditText
 import android.widget.Toast
 import androidx.core.widget.addTextChangedListener
 import io.github.masterj3y.sorna.R
@@ -15,7 +16,7 @@ fun FragmentCreateNewAdBinding.isAdDetailsValid(selectedCategoryId: String?): Bo
     val titleText = title.text.toString()
     val descriptionText = description.text.toString()
     val phoneNumberText = phoneNumber.text.toString()
-    val priceNumber = price.text.toString().toLong()
+    val priceNumber = getPriceNumber(price)
 
     var validationState = 0
     var viewToFocus: View? = null
@@ -59,7 +60,9 @@ fun FragmentCreateNewAdBinding.addTextFieldsOnChangedListener() {
     title.addTextChangedListener { if (it.toString().length > TITLE_MIN_LEN) titleLayout.isErrorEnabled = false }
     description.addTextChangedListener { if (it.toString().length > DESC_MIN_LEN) descriptionLayout.isErrorEnabled = false }
     phoneNumber.addTextChangedListener { if (isPhoneNumberValid(it.toString())) phoneNumberLayout.isErrorEnabled = false }
-    price.addTextChangedListener { if (it.toString().toLong() > PRICE_MIN) priceLayout.isErrorEnabled = false }
+    price.addTextChangedListener { if (getPriceNumber(price) >= PRICE_MIN) priceLayout.isErrorEnabled = false }
 }
 
 fun isPhoneNumberValid(phoneNumber: String) = Pattern.matches("09[01239]\\d{8}", phoneNumber)
+
+fun getPriceNumber(editText: EditText): Long = if (editText.text.isNullOrBlank()) 0 else editText.text.toString().toLong()
