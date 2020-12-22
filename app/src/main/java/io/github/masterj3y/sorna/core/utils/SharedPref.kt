@@ -1,22 +1,45 @@
 package io.github.masterj3y.sorna.core.utils
 
+import android.app.Application
 import android.content.Context
 import android.content.SharedPreferences
 import androidx.core.content.edit
+import javax.inject.Inject
 
-class SharedPref(context: Context) {
+class SharedPref @Inject constructor(application: Application) {
 
     private val preferences: SharedPreferences =
-            context.getSharedPreferences("pref", Context.MODE_PRIVATE)
+            application.getSharedPreferences("pref", Context.MODE_PRIVATE)
 
     val isLoggedIn: Boolean
         get() = accessToken.isNotEmpty()
 
     var accessToken: String
-        get() = preferences.getString(ACCESS_TOKEN, "") ?: ""
-        set(value) {
-            put(ACCESS_TOKEN to value)
-        }
+        get() = getString(ACCESS_TOKEN to "")
+        set(value) = put(ACCESS_TOKEN to value)
+
+    var userGivenName: String
+        get() = getString(USER_GIVEN_NAME to "Unknown")
+        set(value) = put(USER_GIVEN_NAME to value)
+
+    var userFamilyName: String
+        get() = getString(USER_FAMILY_NAME to "Unknown")
+        set(value) = put(USER_FAMILY_NAME to value)
+
+    var userDisplayName: String
+        get() = getString(USER_DISPLAY_NAME to "Unknown")
+        set(value) = put(USER_DISPLAY_NAME to value)
+
+    var userEmailAddress: String
+        get() = getString(USER_EMAIL_ADDRESS to "Unknown")
+        set(value) = put(USER_EMAIL_ADDRESS to value)
+
+    var userPhotoUrl: String
+        get() = getString(USER_PHOTO_URL to "Null")
+        set(value) = put(USER_PHOTO_URL to value)
+
+    private fun getString(pair: Pair<String, String>): String =
+            preferences.getString(pair.first, pair.second) ?: pair.second
 
     private fun <T> put(data: Pair<String, T>) {
         when (data.second) {
@@ -33,5 +56,10 @@ class SharedPref(context: Context) {
 
     companion object {
         private const val ACCESS_TOKEN = "at"
+        private const val USER_GIVEN_NAME = "user_given_name"
+        private const val USER_FAMILY_NAME = "user_family_name"
+        private const val USER_DISPLAY_NAME = "user_display_name"
+        private const val USER_EMAIL_ADDRESS = "user_email_address"
+        private const val USER_PHOTO_URL = "user_photo_url"
     }
 }

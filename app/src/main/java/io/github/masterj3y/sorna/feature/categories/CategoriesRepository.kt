@@ -5,8 +5,9 @@ import io.github.masterj3y.sorna.core.platform.CacheNetworkBoundRepository
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.Flow
 import retrofit2.Response
+import javax.inject.Inject
 
-class CategoriesRepository(private val service: CategoriesService, private val appDatabase: AppDatabase) {
+class CategoriesRepository @Inject constructor(private val service: CategoriesService, private val appDatabase: AppDatabase) {
 
     private val dao: CategoriesDao get() = appDatabase.categoriesDao()
 

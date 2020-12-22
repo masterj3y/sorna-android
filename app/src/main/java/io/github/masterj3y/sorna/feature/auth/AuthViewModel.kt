@@ -4,10 +4,10 @@ import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.switchMap
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import io.github.masterj3y.sorna.core.platform.BaseViewModel
 import io.github.masterj3y.sorna.core.utils.AppSession
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.InternalCoroutinesApi
 
 class AuthViewModel @ViewModelInject constructor(
         private val repository: AuthRepository,
@@ -30,8 +30,9 @@ class AuthViewModel @ViewModelInject constructor(
         }
     }
 
-    fun signIn(googleIdToken: String) {
-        this.googleIdToken.value = googleIdToken
+    fun signIn(account: GoogleSignInAccount) {
+        account.idToken?.let { this.googleIdToken.value = it }
+        saveUserProfile(account)
     }
 
     private fun loading(visible: Boolean = true) {
@@ -46,5 +47,13 @@ class AuthViewModel @ViewModelInject constructor(
     private fun onError(message: String) {
         loading(false)
         this.error.value = message
+    }
+
+    private fun saveUserProfile(account: GoogleSignInAccount) = with(appSession) {
+        account.givenName?.let { userGivenName = it }
+        account.familyName?.let { userFamilyName = it }
+        account.displayName?.let { userDisplayName = it }
+        account.email?.let { userEmailAddress = it }
+        account.photoUrl?.let { userPhotoUrl = it }
     }
 }

@@ -35,3 +35,15 @@ fun ImageView.loadCircularFromUrl(
         .transition(DrawableTransitionOptions.withCrossFade())
         .into(this)
 }
+
+fun ImageView.loadCircularFromUri(
+        url: Uri,
+        vararg transformations: Transformation<Bitmap> = arrayOf()
+) {
+    Glide.with(context)
+            .load(url)
+            .transform(*transformations)
+            .circleCrop()
+            .transition(DrawableTransitionOptions.withCrossFade())
+            .into(this)
+}

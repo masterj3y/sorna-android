@@ -48,8 +48,7 @@ class AuthActivity : BaseActivity<ActivityAuthBinding>() {
     } catch (e: ApiException) {
     }
 
-    private fun onAccountLoaded(account: GoogleSignInAccount) =
-            account.idToken?.let { viewModel.signIn(it) }
+    private fun onAccountLoaded(account: GoogleSignInAccount) = viewModel.signIn(account)
 
     @ExperimentalCoroutinesApi
     override fun onCreate(savedInstanceState: Bundle?) {
