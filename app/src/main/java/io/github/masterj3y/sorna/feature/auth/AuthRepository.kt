@@ -3,8 +3,9 @@ package io.github.masterj3y.sorna.feature.auth
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.flow
+import javax.inject.Inject
 
-class AuthRepository(private val service: AuthService) {
+class AuthRepository @Inject constructor(private val service: AuthService) {
 
     @ExperimentalCoroutinesApi
     fun signIn(googleIdToken: String,

@@ -8,8 +8,9 @@ import kotlinx.coroutines.flow.*
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import retrofit2.Response
+import javax.inject.Inject
 
-class AdsRepository(private val service: AdService, private val appDatabase: AppDatabase) {
+class AdsRepository @Inject constructor(private val service: AdService, private val appDatabase: AppDatabase) {
 
     private val adsDao: AdsDao get() = appDatabase.adsDao()
     private val adPicturesDao: AdsPictureDao get() = appDatabase.adPicturesDao()
