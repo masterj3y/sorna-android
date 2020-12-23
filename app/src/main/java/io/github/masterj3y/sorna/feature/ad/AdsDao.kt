@@ -16,6 +16,9 @@ interface AdsDao {
     @Query("SELECT * FROM Ad ORDER BY createdAt DESC")
     fun findAll(): Flow<List<Ad>>
 
+    @Query("SELECT * FROM Ad WHERE saved = 1 ORDER BY createdAt DESC")
+    fun findAllSavedAds(): Flow<List<Ad>>
+
     @Query("SELECT * FROM Ad WHERE id = :adId")
     fun findById(adId: String): Flow<Ad>
 

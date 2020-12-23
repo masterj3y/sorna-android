@@ -34,4 +34,8 @@
     <string name="time_to_moment_yesterday">دیروز</string>
     <string name="time_to_moment_some_days_ago">%1$d روز پیش</string>
     <string name="search_ads_input_hint">جستجوی آگهی</string>
+    <string name="profile_user_ads">User Ads</string>
+    <string name="saved_ads">Saved Ads</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

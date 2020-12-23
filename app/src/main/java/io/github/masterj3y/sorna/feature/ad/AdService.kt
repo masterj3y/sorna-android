@@ -24,6 +24,9 @@ interface AdService {
     @GET("ad/user-ads")
     suspend fun fetchAllUserAds(): Response<List<Ad>>
 
+    @GET("ad/user-saved-ads")
+    suspend fun fetchAllSavedAds(): Response<List<Ad>>
+
     @GET("ad/search/{keyword}")
     suspend fun searchAds(@Path("keyword") keyword: String): Response<List<Ad>>
 

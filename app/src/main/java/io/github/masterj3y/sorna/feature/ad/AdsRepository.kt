@@ -73,6 +73,21 @@ class AdsRepository @Inject constructor(private val service: AdService, private 
             }.asFlow()
 
     @ExperimentalCoroutinesApi
+    fun getAllSavedAds(
+            onSuccess: () -> Unit,
+            onError: (String) -> Unit
+    ): Flow<List<Ad>> =
+            object : CacheNetworkBoundRepository<List<Ad>, List<Ad>>(onSuccess, onError) {
+
+                override suspend fun saveRemoteData(response: List<Ad>) = saveAdsInDB(response)
+
+                override fun fetchFromLocal(): Flow<List<Ad>> = fetchSavedAdsFromLocal()
+
+                override suspend fun fetchFromRemote(): Response<List<Ad>> =
+                        service.fetchAllSavedAds()
+            }.asFlow()
+
+    @ExperimentalCoroutinesApi
     fun getAdById(adId: String): Flow<Ad> = flow {
         val adFlow = adsDao.findById(adId).onEach {
             val adPictures = adPicturesDao.findAllByAdId(it.id).first()
@@ -90,6 +105,18 @@ class AdsRepository @Inject constructor(private val service: AdService, private 
     @ExperimentalCoroutinesApi
     private fun fetchAdsFromLocal(): Flow<List<Ad>> = flow {
         val adsFlow = adsDao.findAll().onEach { ads ->
+            ads.forEach {
+                val adId = it.id
+                val adPictures = adPicturesDao.findAllByAdId(adId).first()
+                it.pics = adPictures
+            }
+        }
+        emitAll(adsFlow)
+    }
+
+    @ExperimentalCoroutinesApi
+    private fun fetchSavedAdsFromLocal(): Flow<List<Ad>> = flow {
+        val adsFlow = adsDao.findAllSavedAds().onEach { ads ->
             ads.forEach {
                 val adId = it.id
                 val adPictures = adPicturesDao.findAllByAdId(adId).first()
