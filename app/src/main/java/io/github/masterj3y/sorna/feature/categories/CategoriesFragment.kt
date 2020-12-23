@@ -9,6 +9,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import io.github.masterj3y.sorna.R
 import io.github.masterj3y.sorna.core.platform.BaseFragment
 import io.github.masterj3y.sorna.databinding.FragmentCategoriesBinding
+import io.github.masterj3y.sorna.feature.categories.categorized_ads.CategorizedAdsFragment
 
 @AndroidEntryPoint
 class CategoriesFragment : BaseFragment<FragmentCategoriesBinding>(R.layout.fragment_categories) {
@@ -27,5 +28,6 @@ class CategoriesFragment : BaseFragment<FragmentCategoriesBinding>(R.layout.frag
         }
     }
 
-    private fun onItemClickedListener(item: Category) {}
+    private fun onItemClickedListener(item: Category) =
+            pushFragment(CategorizedAdsFragment.instance(item.id))
 }

@@ -21,6 +21,9 @@ interface AdService {
     @GET("ad/")
     suspend fun fetchAll(): Response<List<Ad>>
 
+    @GET("ad/category/{id}")
+    suspend fun fetchAllByCategory(@Path("id") id: String): Response<List<Ad>>
+
     @GET("ad/user-ads")
     suspend fun fetchAllUserAds(): Response<List<Ad>>
 

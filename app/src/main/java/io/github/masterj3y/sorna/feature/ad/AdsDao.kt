@@ -4,7 +4,6 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import io.github.masterj3y.sorna.feature.ad.Ad
 import kotlinx.coroutines.flow.Flow
 
 @Dao
@@ -15,6 +14,9 @@ interface AdsDao {
 
     @Query("SELECT * FROM Ad ORDER BY createdAt DESC")
     fun findAll(): Flow<List<Ad>>
+
+    @Query("SELECT * FROM Ad WHERE categoryId = :categoryId ORDER BY createdAt DESC")
+    fun findAllByCategory(categoryId: String): Flow<List<Ad>>
 
     @Query("SELECT * FROM Ad WHERE saved = 1 ORDER BY createdAt DESC")
     fun findAllSavedAds(): Flow<List<Ad>>
