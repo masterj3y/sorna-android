@@ -23,8 +23,8 @@ abstract class CacheNetworkBoundRepository<RESULT, REQUEST>(
         } else {
             onError(apiResponse.message())
         }
-        emitAll(fetchFromLocal())
         onSuccess()
+        emitAll(fetchFromLocal())
     }.catch { e ->
         e.message?.let { onError(it) }
     }
