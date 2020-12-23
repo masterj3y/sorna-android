@@ -7,6 +7,7 @@ import io.github.masterj3y.sorna.R
 import io.github.masterj3y.sorna.core.platform.BaseFragment
 import io.github.masterj3y.sorna.core.utils.AppSession
 import io.github.masterj3y.sorna.databinding.FragmentUserProfileBinding
+import io.github.masterj3y.sorna.feature.ad.user_ads.UserAdsFragment
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -20,6 +21,9 @@ class UserProfileFragment : BaseFragment<FragmentUserProfileBinding>(R.layout.fr
 
         binding.apply {
             userProfile = appSession.userProfile
+            userAds.setOnClickListener { openUserAds() }
         }
     }
+
+    private fun openUserAds() = pushFragment(UserAdsFragment())
 }

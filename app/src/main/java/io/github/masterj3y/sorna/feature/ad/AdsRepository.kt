@@ -63,6 +63,16 @@ class AdsRepository @Inject constructor(private val service: AdService, private 
             }.asFlow()
 
     @ExperimentalCoroutinesApi
+    fun getAllUserAds(
+            onSuccess: suspend () -> Unit,
+            onError: suspend (String) -> Unit
+    ):Flow<List<Ad>> =
+            object : NetworkBoundRepository<List<Ad>>(onSuccess, onError) {
+                override suspend fun fetchFromRemote(): Response<List<Ad>> =
+                        service.fetchAllUserAds()
+            }.asFlow()
+
+    @ExperimentalCoroutinesApi
     fun getAdById(adId: String): Flow<Ad> = flow {
         val adFlow = adsDao.findById(adId).onEach {
             val adPictures = adPicturesDao.findAllByAdId(it.id).first()
