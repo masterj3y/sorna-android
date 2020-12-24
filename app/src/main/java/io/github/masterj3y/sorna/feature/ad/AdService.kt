@@ -38,4 +38,7 @@ interface AdService {
 
     @PUT("ad/waste/{id}")
     suspend fun waste(@Path("id") adId: String): Response<String>
+
+    @DELETE("ad/{id}")
+    suspend fun delete(@Path("id") adId: String): Response<String>
 }

@@ -36,6 +36,6 @@
     <string name="search_ads_input_hint">جستجوی آگهی</string>
     <string name="profile_user_ads">User Ads</string>
     <string name="saved_ads">Saved Ads</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="user_ads_show_details">Show details</string>
+    <string name="user_ads_delete">Delete</string>
 </resources>

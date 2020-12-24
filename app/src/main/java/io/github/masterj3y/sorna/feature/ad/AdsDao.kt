@@ -18,6 +18,9 @@ interface AdsDao {
     @Query("SELECT * FROM Ad WHERE categoryId = :categoryId ORDER BY createdAt DESC")
     fun findAllByCategory(categoryId: String): Flow<List<Ad>>
 
+    @Query("SELECT * FROM ad WHERE ownedByUser = 1 ORDER BY createdAt DESC")
+    fun findAllUserAds(): Flow<List<Ad>>
+
     @Query("SELECT * FROM Ad WHERE saved = 1 ORDER BY createdAt DESC")
     fun findAllSavedAds(): Flow<List<Ad>>
 
@@ -29,4 +32,7 @@ interface AdsDao {
 
     @Query("UPDATE Ad SET saved = 0 WHERE id = :adId")
     suspend fun waste(adId: String)
+
+    @Query("DELETE FROM ad WHERE id = :adId")
+    suspend fun delete(adId: String)
 }

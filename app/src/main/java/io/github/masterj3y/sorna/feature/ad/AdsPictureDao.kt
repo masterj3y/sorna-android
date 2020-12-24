@@ -14,4 +14,7 @@ interface AdsPictureDao {
 
     @Query("SELECT * FROM adpicture WHERE adId = :adId")
     fun findAllByAdId(adId: String): Flow<List<AdPicture>>
+
+    @Query("DELETE FROM adpicture WHERE adId = :adId")
+    suspend fun delete(adId: String)
 }

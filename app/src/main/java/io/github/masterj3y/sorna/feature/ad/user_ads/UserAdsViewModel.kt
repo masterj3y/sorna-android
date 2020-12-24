@@ -4,10 +4,12 @@ import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.switchMap
+import androidx.lifecycle.viewModelScope
 import io.github.masterj3y.sorna.core.platform.BaseViewModel
 import io.github.masterj3y.sorna.feature.ad.Ad
 import io.github.masterj3y.sorna.feature.ad.AdsRepository
 import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.launch
 
 class UserAdsViewModel @ViewModelInject constructor(private val repository: AdsRepository) : BaseViewModel() {
 
@@ -27,6 +29,10 @@ class UserAdsViewModel @ViewModelInject constructor(private val repository: AdsR
 
     fun getUserAds() {
         this.getUserAds.value = true
+    }
+
+    fun delete(adId: String) {
+        viewModelScope.launch { repository.delete(adId, {}, {}) }
     }
 
     private fun loading(loading: Boolean = true) {

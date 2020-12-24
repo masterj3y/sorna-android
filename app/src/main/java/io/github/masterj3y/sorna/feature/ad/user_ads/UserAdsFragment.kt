@@ -10,6 +10,9 @@ import io.github.masterj3y.sorna.databinding.FragmentUserAdsBinding
 import io.github.masterj3y.sorna.feature.ad.Ad
 import io.github.masterj3y.sorna.feature.ad.ads.AdsAdapter
 import io.github.masterj3y.sorna.feature.ad.details.AdDetailsActivity
+import io.github.masterj3y.sorna.feature.dialog.action.ActionDialog
+import io.github.masterj3y.sorna.feature.dialog.action.ActionDialogItem
+import io.github.masterj3y.sorna.feature.dialog.action.actionDialog
 
 @AndroidEntryPoint
 class UserAdsFragment : BaseFragment<FragmentUserAdsBinding>(R.layout.fragment_user_ads) {
@@ -27,6 +30,27 @@ class UserAdsFragment : BaseFragment<FragmentUserAdsBinding>(R.layout.fragment_u
         }
     }
 
-    private fun onItemClicked(item: Ad) =
-            AdDetailsActivity.start(requireContext(), item.id)
+    private fun onItemClicked(item: Ad) = actionDialog {
+        title(item.title)
+        items = dialogItems(item.id, this)
+    }.show()
+
+    private fun dialogItems(adId: String, dialog: ActionDialog) = listOf(
+            ActionDialogItem(
+                    icon = R.drawable.ic_baseline_remove_red_eye_24,
+                    text = getString(R.string.user_ads_show_details),
+                    onClick = {
+                        AdDetailsActivity.start(requireContext(), adId)
+                        dialog.dismiss()
+                    }
+            ),
+            ActionDialogItem(
+                    icon = R.drawable.ic_baseline_delete_forever_24,
+                    text = getString(R.string.user_ads_delete),
+                    onClick = {
+                        model.delete(adId)
+                        dialog.dismiss()
+                    }
+            )
+    )
 }
