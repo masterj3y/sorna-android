@@ -28,27 +28,16 @@ class AdsRepository @Inject constructor(private val service: AdService, private 
             price: RequestBody,
             categoryId: RequestBody,
             vararg pics: MultipartBody.Part
-    ) {
-
-        try {
-            val apiResponse = service.postAd(
-                    title,
-                    description,
-                    phoneNumber,
-                    price,
-                    categoryId,
-                    *pics
-            )
-            val body = apiResponse.body()
-            if (apiResponse.isSuccessful && body != null) {
+    ) = networkRequest(
+            onSuccess = {
+                saveAdsInDB(listOf(it))
                 onSuccess()
-            } else {
-                onError(apiResponse.message())
+            },
+            onError = { onError(it) },
+            request = {
+                service.postAd(title, description, phoneNumber, price, categoryId, *pics)
             }
-        } catch (e: Exception) {
-            e.printStackTrace()
-        }
-    }
+    )
 
     @ExperimentalCoroutinesApi
     fun getAllAds(
@@ -169,20 +158,26 @@ class AdsRepository @Inject constructor(private val service: AdService, private 
 
     @ExperimentalCoroutinesApi
     suspend fun save(adId: String, onSuccess: (String) -> Unit, onError: (String) -> Unit) =
-            networkRequest(onSuccess = {
-                adsDao.save(adId)
-                onSuccess(it)
-            }, onError = { onError(it) })
-            { service.save(adId) }
+            networkRequest(
+                    onSuccess = {
+                        adsDao.save(adId)
+                        onSuccess(it)
+                    },
+                    onError = { onError(it) },
+                    request = { service.save(adId) }
+            )
 
     @ExperimentalCoroutinesApi
     suspend fun waste(adId: String, onSuccess: (String) -> Unit, onError: (String) -> Unit) =
-            networkRequest(onSuccess = {
-                adsDao.waste(adId)
-                onSuccess(it)
-            },
-                    onError = { onError(it) })
-            { service.waste(adId) }
+            networkRequest(
+                    onSuccess = {
+                        adsDao.waste(adId)
+                        onSuccess(it)
+                    },
+                    onError = { onError(it) },
+                    request = { service.waste(adId) }
+            )
+
 
     private suspend fun <T> networkRequest(onSuccess: suspend (T) -> Unit, onError: suspend (String) -> Unit, request: suspend () -> Response<T>) {
         io {

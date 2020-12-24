@@ -27,7 +27,9 @@ data class Ad(
         @SerializedName("createdAt")
         val createdAt: Long,
         @SerializedName("saved")
-        val saved: Boolean
+        val saved: Boolean,
+        @SerializedName("ownedByUser")
+        val ownedByUser: Boolean = false
 ) : BaseEntity<String>, Parcelable {
 
     @Ignore

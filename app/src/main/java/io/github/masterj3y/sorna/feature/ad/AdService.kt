@@ -16,7 +16,7 @@ interface AdService {
             @Part("price") price: RequestBody,
             @Part("categoryId") categoryId: RequestBody,
             @Part vararg pics: MultipartBody.Part
-    ): Response<String>
+    ): Response<Ad>
 
     @GET("ad/")
     suspend fun fetchAll(): Response<List<Ad>>
