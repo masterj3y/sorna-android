@@ -3,8 +3,11 @@ package io.github.masterj3y.sorna.feature.ad
 import io.github.masterj3y.sorna.core.database.AppDatabase
 import io.github.masterj3y.sorna.core.platform.CacheNetworkBoundRepository
 import io.github.masterj3y.sorna.core.platform.NetworkBoundRepository
+import kotlinx.coroutines.Dispatchers.IO
+import kotlinx.coroutines.Dispatchers.Main
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.withContext
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import retrofit2.Response
@@ -154,7 +157,7 @@ class AdsRepository @Inject constructor(private val service: AdService, private 
         emitAll(adsFlow)
     }
 
-    suspend fun saveAdsInDB(ads: List<Ad>) {
+    private suspend fun saveAdsInDB(ads: List<Ad>) {
         ads.forEach { ad ->
             ad.pics?.let { pics ->
                 pics.forEach { pic -> pic.adId = ad.id }
@@ -165,28 +168,39 @@ class AdsRepository @Inject constructor(private val service: AdService, private 
     }
 
     @ExperimentalCoroutinesApi
-    suspend fun save(adId: String, onSuccess: suspend () -> Unit, onError: suspend (String) -> Unit) {
-        object : NetworkBoundRepository<String>(
-                onSuccess = {
-                    adsDao.save(adId)
-                    onSuccess()
-                },
-                onError = onError
-        ) {
-            override suspend fun fetchFromRemote(): Response<String> = service.save(adId)
-        }.asFlow().first()
-    }
+    suspend fun save(adId: String, onSuccess: (String) -> Unit, onError: (String) -> Unit) =
+            networkRequest(onSuccess = {
+                adsDao.save(adId)
+                onSuccess(it)
+            }, onError = { onError(it) })
+            { service.save(adId) }
 
     @ExperimentalCoroutinesApi
-    suspend fun waste(adId: String, onSuccess: suspend () -> Unit, onError: suspend (String) -> Unit) {
-        object : NetworkBoundRepository<String>(
-                onSuccess = {
-                    adsDao.waste(adId)
-                    onSuccess()
-                },
-                onError = onError
-        ) {
-            override suspend fun fetchFromRemote(): Response<String> = service.waste(adId)
-        }.asFlow().first()
+    suspend fun waste(adId: String, onSuccess: (String) -> Unit, onError: (String) -> Unit) =
+            networkRequest(onSuccess = {
+                adsDao.waste(adId)
+                onSuccess(it)
+            },
+                    onError = { onError(it) })
+            { service.waste(adId) }
+
+    private suspend fun <T> networkRequest(onSuccess: suspend (T) -> Unit, onError: suspend (String) -> Unit, request: suspend () -> Response<T>) {
+        io {
+
+            try {
+                val response = request()
+                val responseBody = response.body()
+                if (response.isSuccessful && responseBody != null) {
+                    main { onSuccess(responseBody) }
+                } else {
+                    main { onError(response.message()) }
+                }
+            } catch (e: Exception) {
+                e.message?.let { main { onError(it) } }
+            }
+        }
     }
+
+    private suspend fun main(func: suspend () -> Unit) = withContext(Main) { func() }
+    private suspend fun io(func: suspend () -> Unit) = withContext(IO) { func() }
 }
