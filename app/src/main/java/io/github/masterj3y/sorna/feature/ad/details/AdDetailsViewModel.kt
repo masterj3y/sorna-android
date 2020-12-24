@@ -16,7 +16,6 @@ import kotlinx.coroutines.launch
 class AdDetailsViewModel @ViewModelInject constructor(private val repository: AdsRepository) : BaseViewModel() {
 
     val saveProgress = MutableLiveData<Boolean>()
-    val isSaved = MutableLiveData<Boolean>()
     val error = MutableLiveData<String>()
 
     private val getAd = MutableLiveData<String>()
@@ -33,7 +32,7 @@ class AdDetailsViewModel @ViewModelInject constructor(private val repository: Ad
     fun save(adId: String) {
         saveProgress()
         viewModelScope.launch {
-            repository.save(adId, onSuccess = { saved(true) }, onError = ::error)
+            repository.save(adId, onSuccess = { saveProgress(false) }, onError = ::error)
         }
     }
 
@@ -41,7 +40,7 @@ class AdDetailsViewModel @ViewModelInject constructor(private val repository: Ad
     fun waste(adId: String) {
         saveProgress()
         viewModelScope.launch {
-            repository.waste(adId, onSuccess = { saved(false) }, onError = ::error)
+            repository.waste(adId, onSuccess = { saveProgress(false) }, onError = ::error)
         }
     }
 
@@ -51,11 +50,6 @@ class AdDetailsViewModel @ViewModelInject constructor(private val repository: Ad
 
     private fun saveProgress(isProgressing: Boolean = true) {
         this.saveProgress.value = isProgressing
-    }
-
-    private fun saved(isBookmarked: Boolean) {
-        saveProgress(false)
-        this.isSaved.value = true
     }
 
     private fun error(message: String) {

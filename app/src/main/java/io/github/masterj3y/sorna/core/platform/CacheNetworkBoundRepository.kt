@@ -19,11 +19,11 @@ abstract class CacheNetworkBoundRepository<RESULT, REQUEST>(
         val apiResponse = fetchFromRemote()
         val remoteData = apiResponse.body()
         if (apiResponse.isSuccessful && remoteData != null) {
+            onSuccess()
             saveRemoteData(remoteData)
         } else {
             onError(apiResponse.message())
         }
-        onSuccess()
         emitAll(fetchFromLocal())
     }.catch { e ->
         e.message?.let { onError(it) }
