@@ -24,6 +24,7 @@ class UserProfileFragment : BaseFragment<FragmentUserProfileBinding>(R.layout.fr
             userProfile = appSession.userProfile
             userAds.setOnClickListener { openUserAds() }
             savedAds.setOnClickListener { openSavedAds() }
+            logout.setOnClickListener { appSession.logout(requireActivity()) }
         }
     }
 

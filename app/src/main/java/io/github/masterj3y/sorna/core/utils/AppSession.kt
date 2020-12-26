@@ -1,10 +1,18 @@
 package io.github.masterj3y.sorna.core.utils
 
+import android.app.Activity
 import android.net.Uri
+import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.auth.api.signin.GoogleSignInClient
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions
+import io.github.masterj3y.sorna.core.AppBase
+import io.github.masterj3y.sorna.feature.auth.AuthActivity
 import io.github.masterj3y.sorna.feature.user_profile.UserProfile
 import javax.inject.Inject
 
-class AppSession @Inject constructor(private val sharedPref: SharedPref) {
+class AppSession @Inject constructor(
+        private val sharedPref: SharedPref,
+        private val googleSignInClient: GoogleSignInClient) {
 
     val isLoggedIn: Boolean
         get() = sharedPref.isLoggedIn
@@ -62,7 +70,14 @@ class AppSession @Inject constructor(private val sharedPref: SharedPref) {
         sharedPref.accessToken = accessToken
     }
 
-    fun logout() {
-        sharedPref.accessToken = ""
+    fun logout(activity: Activity) {
+        activity.run {
+            googleSignInClient.signOut()
+                    .addOnCompleteListener {
+                        sharedPref.accessToken = ""
+                        AuthActivity.start(this)
+                        finishAffinity()
+                    }
+        }
     }
 }

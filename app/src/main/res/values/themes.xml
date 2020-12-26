@@ -12,6 +12,7 @@
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
+        <item name="android:fontFamily">@font/font_ir_yekan_regular</item>
     </style>
 
     <style name="TransparentBottomSheetDialog" parent="Theme.Design.Light.BottomSheetDialog">
@@ -24,6 +25,18 @@
         <item name="android:windowFrame">@null</item>
         <item name="android:windowIsFloating">true</item>
     </style>
+
+    <style name="Text" parent="Widget.MaterialComponents.TextView"/>
+
+    <style name="BoldText" parent="Text">
+        <item name="android:fontFamily">@font/ir_yekan_bold</item>
+    </style>
+
+    <style name="Headline5" parent="BoldText">
+        <item name="android:textSize">20sp</item>
+    </style>
+
+    <style name="Body" parent="Text"/>
 
     <style name="AdImageLayout">
         <item name="android:background">@color/LightBlue_700</item>

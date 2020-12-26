@@ -3,36 +3,38 @@ package io.github.masterj3y.sorna.feature.auth
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.switchMap
+import androidx.lifecycle.viewModelScope
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import io.github.masterj3y.sorna.core.platform.BaseViewModel
 import io.github.masterj3y.sorna.core.utils.AppSession
 import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.cancel
+import kotlinx.coroutines.launch
 
 class AuthViewModel @ViewModelInject constructor(
         private val repository: AuthRepository,
         private val appSession: AppSession) : BaseViewModel() {
 
-    private val googleIdToken = MutableLiveData<String>()
-
     val loading = MutableLiveData(false)
     val error = MutableLiveData("")
 
+    private val _isSignedIn = MutableLiveData<Boolean>()
+    val isSignedIn: LiveData<Boolean> get() = _isSignedIn
+
     @ExperimentalCoroutinesApi
-    val isSignedIn: LiveData<Boolean> = googleIdToken.switchMap {
-        loading()
-        launchOnViewModelScope {
-            repository.signIn(
-                    googleIdToken = it,
-                    onSuccess = { accessToken -> onSuccess(accessToken) },
-                    onError = { error -> onError(error) }
-            )
+    fun signIn(account: GoogleSignInAccount) {
+        account.idToken?.let { idToken ->
+            loading()
+            viewModelScope.launch {
+                repository.signIn(googleIdToken = idToken, onSuccess = ::onSuccess, onError = ::onError)
+            }
         }
+        saveUserProfile(account)
     }
 
-    fun signIn(account: GoogleSignInAccount) {
-        account.idToken?.let { this.googleIdToken.value = it }
-        saveUserProfile(account)
+    fun cancelSignIn() {
+        viewModelScope.cancel()
+        loading(false)
     }
 
     private fun loading(visible: Boolean = true) {
@@ -41,6 +43,7 @@ class AuthViewModel @ViewModelInject constructor(
 
     private fun onSuccess(accessToken: String) {
         loading(false)
+        _isSignedIn.value =true
         appSession.login(accessToken)
     }
 

@@ -8,22 +8,23 @@ import javax.inject.Inject
 class AuthRepository @Inject constructor(private val service: AuthService) {
 
     @ExperimentalCoroutinesApi
-    fun signIn(googleIdToken: String,
+    suspend fun signIn(googleIdToken: String,
                onSuccess: (accessToken: String) -> Unit,
-               onError: (error: String) -> Unit) = flow {
+               onError: (error: String) -> Unit)  {
 
-        val apiResponse = service.loginWithGoogle(googleIdToken)
-        val headers = apiResponse.headers()
-        val accessToken = headers["Authorization"]
-        if (apiResponse.isSuccessful && accessToken != null) {
-            emit(true)
-            onSuccess(accessToken)
-        } else {
-            onError("Sign in failed")
-        }
-    }.catch { e ->
-        e.message?.let {
-            onError("Sign in failed")
+        try {
+            val apiResponse = service.loginWithGoogle(googleIdToken)
+            val headers = apiResponse.headers()
+            val accessToken = headers["Authorization"]
+            if (apiResponse.isSuccessful && accessToken != null) {
+                onSuccess(accessToken)
+            } else {
+                onError("Sign in failed")
+            }
+        } catch (e: Exception) {
+            e.message?.let {
+                onError("Sign in failed")
+            }
         }
     }
 }
