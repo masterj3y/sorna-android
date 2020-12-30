@@ -38,9 +38,10 @@ abstract class BaseFragment<B : ViewDataBinding>(@LayoutRes private val layoutRe
         return binding.root
     }
 
-    fun pushFragment(fragment: Fragment) {
+    fun pushFragment(fragment: Fragment)=
         fragNavController.pushFragment(fragment)
-    }
+
+    fun switchTab(tab: Int) = fragNavController.switchTab(tab)
 
     interface FragmentNavigation {
         fun getFragNavigationController(): FragNavController

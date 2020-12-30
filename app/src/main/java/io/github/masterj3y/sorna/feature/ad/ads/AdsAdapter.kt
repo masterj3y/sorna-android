@@ -5,8 +5,10 @@ import android.widget.ImageView
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import io.github.masterj3y.sorna.R
 import io.github.masterj3y.sorna.core.di.NetworkModule
+import io.github.masterj3y.sorna.core.extension.dpToPx
 import io.github.masterj3y.sorna.core.extension.inflate
 import io.github.masterj3y.sorna.core.extension.loadFromUrl
 import io.github.masterj3y.sorna.core.platform.DiffCallBack

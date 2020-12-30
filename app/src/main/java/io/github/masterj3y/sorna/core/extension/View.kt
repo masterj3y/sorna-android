@@ -5,6 +5,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.animation.OvershootInterpolator
 import androidx.annotation.LayoutRes
+import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.RecyclerView
 import jp.wasabeef.recyclerview.animators.SlideInUpAnimator
 
 fun ViewGroup.inflate(@LayoutRes layoutRes: Int): View =
@@ -31,4 +33,8 @@ fun itemAnimator() = SlideInUpAnimator(OvershootInterpolator(1f)).apply {
     removeDuration = 300
     moveDuration = 300
     changeDuration = 300
+}
+
+fun RecyclerView.addDividerItemDecoration() {
+    addItemDecoration(DividerItemDecoration(context, RecyclerView.VERTICAL))
 }

@@ -12,8 +12,8 @@ class CategoriesRepository @Inject constructor(private val service: CategoriesSe
     private val dao: CategoriesDao get() = appDatabase.categoriesDao()
 
     @ExperimentalCoroutinesApi
-    fun getAllCategories() = object : CacheNetworkBoundRepository<List<Category>, List<Category>>(
-            onSuccess = {}, onError = {println(it) }
+    fun getAllCategories(onSuccess: () -> Unit, onError: (String) -> Unit) = object : CacheNetworkBoundRepository<List<Category>, List<Category>>(
+            onSuccess = onSuccess, onError = onError
     ) {
         override suspend fun saveRemoteData(response: List<Category>) =
                 dao.insert(*response.toTypedArray())

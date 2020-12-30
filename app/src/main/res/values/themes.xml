@@ -26,7 +26,7 @@
         <item name="android:windowIsFloating">true</item>
     </style>
 
-    <style name="Text" parent="Widget.MaterialComponents.TextView"/>
+    <style name="Text" parent="Widget.MaterialComponents.TextView" />
 
     <style name="BoldText" parent="Text">
         <item name="android:fontFamily">@font/ir_yekan_bold</item>
@@ -34,15 +34,58 @@
 
     <style name="Headline5" parent="BoldText">
         <item name="android:textSize">20sp</item>
+        <item name="android:textColor">#131313</item>
     </style>
 
-    <style name="Body" parent="Text"/>
+    <style name="ToolbarTitle" parent="BoldText">
+        <item name="android:textSize">17sp</item>
+        <item name="android:textColor">#fff</item>
+    </style>
+
+    <style name="Body" parent="Text" />
+
+    <style name="ClickableText" parent="Text">
+        <item name="android:clickable">true</item>
+        <item name="android:focusable">true</item>
+        <item name="android:textColor">#171717</item>
+        <item name="android:background">?android:attr/selectableItemBackground</item>
+    </style>
+
+    <style name="UserProfileEmail" parent="Text">
+        <item name="android:textColor">#f9f9f9</item>
+    </style>
+
+    <style name="ProfileOption" parent="ClickableText">
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:padding">16dp</item>
+        <item name="android:drawablePadding">8dp</item>
+    </style>
+
+    <style name="VerticalDivider">
+        <item name="android:height">1dp</item>
+        <item name="android:background">#9A9A9A</item>
+    </style>
+
+    <style name="SearchInput" parent="Widget.AppCompat.EditText">
+        <item name="android:background">@drawable/background_search_input</item>
+        <item name="android:paddingTop">4dp</item>
+        <item name="android:paddingBottom">4dp</item>
+        <item name="android:paddingStart">16dp</item>
+        <item name="android:paddingEnd">16dp</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColorHint">#CDCDCD</item>
+        <item name="android:textColor">#E8E8E8</item>
+    </style>
+
+    <style name="Button" parent="Widget.MaterialComponents.Button">
+        <item name="android:padding">8dp</item>
+    </style>
+
+    <style name="OutlinedButton" parent="Widget.MaterialComponents.Button.OutlinedButton">
+        <item name="android:padding">8dp</item>
+    </style>
 
     <style name="AdImageLayout">
         <item name="android:background">@color/LightBlue_700</item>
-    </style>
-
-    <style name="AdPictureFade">
-        <item name="android:background">@drawable/shape_ad_picture_pager_fade</item>
     </style>
 </resources>

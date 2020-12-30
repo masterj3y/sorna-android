@@ -33,6 +33,11 @@ class CreateNewAdImageAdapter(
         notifyDataSetChanged()
     }
 
+    fun clear() {
+        list.clear()
+        notifyDataSetChanged()
+    }
+
     private fun removeItem(position: Int) {
         list.removeAt(position)
         list.add(Uri.EMPTY)

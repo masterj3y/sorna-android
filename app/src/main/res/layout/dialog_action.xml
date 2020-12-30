@@ -31,9 +31,9 @@
             android:id="@+id/recyclerView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingBottom="16dp"
-            android:paddingEnd="@dimen/actionDialogPadding"
             android:paddingStart="@dimen/actionDialogPadding"
+            android:paddingEnd="@dimen/actionDialogPadding"
+            android:paddingBottom="16dp"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             tools:itemCount="4"
             tools:listitem="@layout/dialog_action_item" />

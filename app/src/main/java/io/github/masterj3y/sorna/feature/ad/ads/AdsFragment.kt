@@ -3,8 +3,10 @@ package io.github.masterj3y.sorna.feature.ad.ads
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
+import androidx.recyclerview.widget.DividerItemDecoration
 import dagger.hilt.android.AndroidEntryPoint
 import io.github.masterj3y.sorna.R
+import io.github.masterj3y.sorna.core.extension.addDividerItemDecoration
 import io.github.masterj3y.sorna.core.platform.BaseFragment
 import io.github.masterj3y.sorna.databinding.FragmentAdsBinding
 import io.github.masterj3y.sorna.feature.ad.Ad
@@ -24,6 +26,7 @@ class AdsFragment : BaseFragment<FragmentAdsBinding>(R.layout.fragment_ads) {
             lifecycleOwner = viewLifecycleOwner
             adapter = AdsAdapter(::onItemClicked)
             viewModel = model.apply { getAds() }
+            recyclerView.addDividerItemDecoration()
             refreshLayout.setOnRefreshListener { model.getAds() }
         }
 

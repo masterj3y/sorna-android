@@ -5,6 +5,7 @@ import android.view.View
 import androidx.fragment.app.viewModels
 import dagger.hilt.android.AndroidEntryPoint
 import io.github.masterj3y.sorna.R
+import io.github.masterj3y.sorna.core.extension.addDividerItemDecoration
 import io.github.masterj3y.sorna.core.platform.BaseFragment
 import io.github.masterj3y.sorna.databinding.FragmentSearchAdsBinding
 import io.github.masterj3y.sorna.feature.ad.Ad
@@ -23,6 +24,7 @@ class SearchAdsFragment : BaseFragment<FragmentSearchAdsBinding>(R.layout.fragme
             lifecycleOwner = viewLifecycleOwner
             adapter = AdsAdapter(::onItemClicked)
             viewModel = model
+            recyclerView.addDividerItemDecoration()
             refreshLayout.setOnRefreshListener { refresh() }
         }
     }

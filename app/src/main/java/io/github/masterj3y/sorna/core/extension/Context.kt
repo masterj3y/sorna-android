@@ -34,3 +34,5 @@ fun Fragment.toast(@StringRes message: Int) {
 }
 
 fun Float.dpToPx(): Float = this * Resources.getSystem().displayMetrics.density
+
+fun Int.dpToPx(): Int = (this * Resources.getSystem().displayMetrics.density).toInt()

@@ -17,164 +17,164 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:fillViewport="true"
         tools:context=".feature.ad.details.AdDetailsActivity">
 
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <com.google.android.material.appbar.AppBarLayout
-                android:layout_width="match_parent"
-                android:layout_height="?android:attr/actionBarSize">
-
-                <com.google.android.material.appbar.MaterialToolbar
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    app:contentInsetStart="0dp">
-
-                    <FrameLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent">
-
-                        <androidx.constraintlayout.widget.ConstraintLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:paddingStart="16dp"
-                            android:paddingEnd="16dp">
-
-                            <com.google.android.material.textview.MaterialTextView
-                                android:id="@+id/title"
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:ellipsize="end"
-                                android:maxLines="1"
-                                android:text="@{viewModel.ad.title}"
-                                app:layout_constraintEnd_toStartOf="@id/save"
-                                app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toTopOf="parent"
-                                tools:text="Title" />
-
-                            <com.google.android.material.textview.MaterialTextView
-                                android:id="@+id/createdAt"
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:textTimeToMoment="@{viewModel.ad.createdAt}"
-                                app:layout_constraintEnd_toStartOf="@id/save"
-                                app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toBottomOf="@id/title"
-                                tools:text="created at" />
-
-                            <androidx.appcompat.widget.AppCompatImageView
-                                android:id="@+id/waste"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:invisible="@{!viewModel.ad.saved}"
-                                android:padding="4dp"
-                                android:src="@drawable/ic_baseline_bookmark_24"
-                                app:layout_constraintBottom_toBottomOf="parent"
-                                app:layout_constraintEnd_toEndOf="parent"
-                                app:layout_constraintTop_toTopOf="parent" />
-
-                            <androidx.appcompat.widget.AppCompatImageView
-                                android:id="@+id/save"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:invisible="@{viewModel.ad.saved}"
-                                android:padding="4dp"
-                                android:src="@drawable/ic_baseline_bookmark_border_24"
-                                app:layout_constraintBottom_toBottomOf="parent"
-                                app:layout_constraintEnd_toEndOf="parent"
-                                app:layout_constraintTop_toTopOf="parent" />
-
-                            <ProgressBar
-                                android:layout_width="24dp"
-                                android:layout_height="24dp"
-                                android:gone="@{!viewModel.saveProgress}"
-                                app:layout_constraintBottom_toBottomOf="@id/save"
-                                app:layout_constraintEnd_toEndOf="@id/save"
-                                app:layout_constraintStart_toStartOf="@id/save"
-                                app:layout_constraintTop_toTopOf="@id/save" />
-                        </androidx.constraintlayout.widget.ConstraintLayout>
-                    </FrameLayout>
-                </com.google.android.material.appbar.MaterialToolbar>
-            </com.google.android.material.appbar.AppBarLayout>
-
-            <FrameLayout
-                android:layout_width="match_parent"
-                android:layout_height="240dp">
-
-                <androidx.viewpager2.widget.ViewPager2
-                    android:layout_width="match_parent"
-                    android:layout_height="240dp"
-                    android:adapter="@{adapter}"
-                    android:background="#730707"
-                    android:bindAdPicturesList="@{viewModel.ad.pics}" />
-
-                <View
-                    style="@style/AdPictureFade"
-                    android:layout_width="match_parent"
-                    android:layout_height="60dp"
-                    android:layout_gravity="bottom" />
-            </FrameLayout>
+            android:layout_height="wrap_content">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="-64dp"
-                android:layout_marginEnd="16dp">
+                android:layout_above="@id/call"
+                android:layout_alignParentTop="true"
+                android:orientation="vertical">
 
-                <com.google.android.material.card.MaterialCardView
-                    android:id="@+id/detailsCard"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="32dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
+                <com.google.android.material.appbar.AppBarLayout
+                    android:id="@+id/appbarLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="?android:attr/actionBarSize"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent">
 
-                    <LinearLayout
+                    <com.google.android.material.appbar.MaterialToolbar
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="32dp"
-                        android:layout_marginBottom="40dp"
-                        android:orientation="vertical"
-                        android:padding="16dp">
+                        android:layout_height="match_parent"
+                        app:contentInsetStart="0dp">
 
-                        <com.google.android.material.textview.MaterialTextView
-                            android:id="@+id/description"
+                        <FrameLayout
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="@{viewModel.ad.description}"
-                            tools:text="Description" />
-                    </LinearLayout>
-                </com.google.android.material.card.MaterialCardView>
+                            android:layout_height="match_parent">
 
-                <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+                            <androidx.constraintlayout.widget.ConstraintLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:paddingStart="16dp"
+                                android:paddingEnd="16dp">
+
+                                <com.google.android.material.textview.MaterialTextView
+                                    android:id="@+id/title"
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:ellipsize="end"
+                                    android:maxLines="1"
+                                    android:text="@{viewModel.ad.title}"
+                                    android:textColor="#fff"
+                                    android:textSize="17dp"
+                                    app:layout_constraintEnd_toStartOf="@id/save"
+                                    app:layout_constraintStart_toStartOf="parent"
+                                    app:layout_constraintTop_toTopOf="parent"
+                                    tools:text="Title" />
+
+                                <com.google.android.material.textview.MaterialTextView
+                                    android:id="@+id/createdAt"
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:textColor="#fff"
+                                    android:textSize="12dp"
+                                    android:textTimeToMoment="@{viewModel.ad.createdAt}"
+                                    app:layout_constraintEnd_toStartOf="@id/save"
+                                    app:layout_constraintStart_toStartOf="parent"
+                                    app:layout_constraintTop_toBottomOf="@id/title"
+                                    tools:text="created at" />
+
+                                <androidx.appcompat.widget.AppCompatImageView
+                                    android:id="@+id/waste"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:invisible="@{!viewModel.ad.saved}"
+                                    android:padding="4dp"
+                                    android:src="@drawable/ic_baseline_bookmark_24"
+                                    android:tint="#F9F9F9"
+                                    app:layout_constraintBottom_toBottomOf="parent"
+                                    app:layout_constraintEnd_toEndOf="parent"
+                                    app:layout_constraintTop_toTopOf="parent" />
+
+                                <androidx.appcompat.widget.AppCompatImageView
+                                    android:id="@+id/save"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:invisible="@{viewModel.ad.saved}"
+                                    android:padding="4dp"
+                                    android:src="@drawable/ic_baseline_bookmark_border_24"
+                                    android:tint="#F9F9F9"
+                                    app:layout_constraintBottom_toBottomOf="parent"
+                                    app:layout_constraintEnd_toEndOf="parent"
+                                    app:layout_constraintTop_toTopOf="parent" />
+
+                                <ProgressBar
+                                    android:layout_width="24dp"
+                                    android:layout_height="24dp"
+                                    android:gone="@{!viewModel.saveProgress}"
+                                    app:layout_constraintBottom_toBottomOf="@id/save"
+                                    app:layout_constraintEnd_toEndOf="@id/save"
+                                    app:layout_constraintStart_toStartOf="@id/save"
+                                    app:layout_constraintTop_toTopOf="@id/save" />
+                            </androidx.constraintlayout.widget.ConstraintLayout>
+                        </FrameLayout>
+                    </com.google.android.material.appbar.MaterialToolbar>
+                </com.google.android.material.appbar.AppBarLayout>
+
+                <androidx.viewpager2.widget.ViewPager2
+                    android:id="@+id/adPicsPager"
+                    android:layout_width="match_parent"
+                    android:layout_height="240dp"
+                    android:adapter="@{adapter}"
+                    android:bindAdPicturesList="@{viewModel.ad.pics}"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/appbarLayout" />
+
+                <com.google.android.material.textview.MaterialTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:drawableStart="@drawable/ic_baseline_monetization_on_24"
+                    android:drawablePadding="8dp"
                     android:textCurrencyFormat="@{viewModel.ad.price}"
-                    app:icon="@drawable/ic_baseline_monetization_on_24"
-                    app:layout_constraintBottom_toTopOf="@id/detailsCard"
-                    app:layout_constraintStart_toStartOf="@id/detailsCard"
-                    app:layout_constraintTop_toTopOf="@id/detailsCard"
+                    app:layout_constraintBottom_toBottomOf="@id/descriptionTitle"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/descriptionTitle"
                     tools:text="2,000,000" />
 
-                <com.google.android.material.floatingactionbutton.FloatingActionButton
-                    android:layout_width="wrap_content"
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/descriptionTitle"
+                    style="@style/Headline5"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
+                    android:text="@string/ad_details_description_title"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/adPicsPager" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/description"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="8dp"
                     android:layout_marginEnd="16dp"
-                    android:id="@+id/call"
-                    android:onClick="@{(view) -> viewModel.call(view, viewModel.ad.phoneNumber)}"
-                    android:src="@drawable/ic_baseline_call_24"
-                    app:layout_constraintBottom_toTopOf="@id/detailsCard"
-                    app:layout_constraintEnd_toEndOf="@id/detailsCard"
-                    app:layout_constraintTop_toTopOf="@id/detailsCard" />
+                    android:text="@{viewModel.ad.description}"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/descriptionTitle"
+                    tools:text="Description" />
             </androidx.constraintlayout.widget.ConstraintLayout>
-        </LinearLayout>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/call"
+                style="@style/Button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_margin="16dp"
+                android:onClick="@{(view) -> viewModel.call(view, viewModel.ad.phoneNumber)}"
+                android:text="@string/ad_details_call_to_ad_owner" />
+        </RelativeLayout>
     </ScrollView>
 </layout>

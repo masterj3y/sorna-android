@@ -12,8 +12,8 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:orientation="vertical"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
         <com.google.android.material.appbar.AppBarLayout
             android:layout_width="match_parent"
@@ -23,8 +23,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingStart="16dp"
-                android:paddingEnd="16dp"
                 android:paddingTop="32dp"
+                android:paddingEnd="16dp"
                 android:paddingBottom="32dp">
 
                 <androidx.appcompat.widget.AppCompatImageView
@@ -38,7 +38,7 @@
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
+                    android:layout_marginStart="16dp"
                     android:orientation="vertical"
                     app:layout_constraintBottom_toBottomOf="@id/photo"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -46,6 +46,7 @@
                     app:layout_constraintTop_toTopOf="@id/photo">
 
                     <com.google.android.material.textview.MaterialTextView
+                        style="@style/ToolbarTitle"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:singleLine="true"
@@ -53,6 +54,7 @@
                         tools:text="Mohammad Jahangiry" />
 
                     <com.google.android.material.textview.MaterialTextView
+                        style="@style/UserProfileEmail"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:singleLine="true"
@@ -63,24 +65,54 @@
         </com.google.android.material.appbar.AppBarLayout>
 
         <com.google.android.material.textview.MaterialTextView
+            style="@style/Headline5"
             android:layout_width="match_parent"
-            android:id="@+id/userAds"
             android:layout_height="wrap_content"
-            android:padding="16dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:text="@string/user_advertisements" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/userAds"
+            style="@style/ProfileOption"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableStart="@drawable/ic_baseline_folder_shared_24"
+            android:drawableEnd="@drawable/ic_baseline_chevron_right_24"
             android:text="@string/profile_user_ads" />
+
+        <View
+            style="@style/VerticalDivider"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginStart="16dp" />
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/savedAds"
+            style="@style/ProfileOption"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="16dp"
+            android:drawableStart="@drawable/ic_baseline_bookmark_24"
+            android:drawableEnd="@drawable/ic_baseline_chevron_right_24"
             android:text="@string/saved_ads" />
 
         <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/logout"
+            style="@style/Headline5"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="16dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:text="@string/user_account" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/logout"
+            style="@style/ProfileOption"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableStart="@drawable/ic_baseline_exit_to_app_24"
+            android:drawableEnd="@drawable/ic_baseline_chevron_right_24"
             android:text="@string/log_out" />
     </LinearLayout>
 </layout>

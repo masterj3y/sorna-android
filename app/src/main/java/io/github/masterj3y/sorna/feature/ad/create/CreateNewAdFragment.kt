@@ -8,7 +8,6 @@ import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
@@ -17,12 +16,14 @@ import com.nguyenhoanglam.imagepicker.model.Image
 import com.nguyenhoanglam.imagepicker.ui.imagepicker.ImagePicker
 import dagger.hilt.android.AndroidEntryPoint
 import io.github.masterj3y.sorna.R
+import io.github.masterj3y.sorna.core.extension.toast
 import io.github.masterj3y.sorna.core.platform.BaseFragment
 import io.github.masterj3y.sorna.databinding.FragmentCreateNewAdBinding
-import io.github.masterj3y.sorna.feature.categories.Category
 import io.github.masterj3y.sorna.feature.ad.create.CreateNewAdImageAdapter.OnItemClickedListener
+import io.github.masterj3y.sorna.feature.categories.Category
 import io.github.masterj3y.sorna.feature.dialog.action.ActionDialogItem
 import io.github.masterj3y.sorna.feature.dialog.action.actionDialog
+import io.github.masterj3y.sorna.feature.main.MainActivity
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import java.io.File
 
@@ -37,7 +38,7 @@ class CreateNewAdFragment :
     private val imageAdapter = CreateNewAdImageAdapter(this)
     private val selectedImages = arrayListOf<Image>()
 
-    private lateinit var selectedCategoryId: String
+    private var selectedCategoryId: String? = null
 
     override fun onRequestPermissionsResult(
             requestCode: Int,
@@ -90,32 +91,35 @@ class CreateNewAdFragment :
 
         isAdPosted.removeObservers(viewLifecycleOwner)
         isAdPosted.observe(viewLifecycleOwner) {
-            if (it)
-                Toast.makeText(requireContext(), R.string.create_new_ad_successful, Toast.LENGTH_SHORT).show()
+            if (it) {
+                toast(R.string.create_new_ad_successful)
+                binding.clearInput()
+                switchTab(MainActivity.TAB_ADS)
+                selectedCategoryId = null
+                selectedImages.clear()
+            }
         }
 
         isFailed.removeObservers(viewLifecycleOwner)
         isFailed.observe(viewLifecycleOwner) {
             if (it)
-                Toast.makeText(requireContext(), R.string.create_new_ad_failed, Toast.LENGTH_SHORT).show()
+                toast(R.string.create_new_ad_failed)
 
         }
     }
 
     @ExperimentalCoroutinesApi
     private fun postAd() = with(binding) {
-        val categoryId =
-                if (::selectedCategoryId.isInitialized)
-                    selectedCategoryId
-                else null
 
-        if (isAdDetailsValid(categoryId)) {
+        val hasImage = selectedImages.isNotEmpty()
+        if (isAdDetailsValid(hasImage, selectedCategoryId)) {
+            val categoryId = requireNotNull(selectedCategoryId)
             val titleText = title.text.toString()
             val descriptionText = description.text.toString()
             val phoneNumberText = phoneNumber.text.toString()
             val priceNumber = price.text.toString().toLong()
-            model.postAd(titleText, descriptionText, phoneNumberText,priceNumber,
-                    selectedCategoryId, selectedImages.mapToFileList())
+            model.postAd(titleText, descriptionText, phoneNumberText, priceNumber,
+                    categoryId, selectedImages.mapToFileList())
         }
     }
 
@@ -134,8 +138,7 @@ class CreateNewAdFragment :
                 ActionDialogItem(
                         text = it.title,
                         onClick = {
-                            Toast.makeText(requireContext(), it.id, Toast.LENGTH_SHORT).show()
-                            binding.selectCategory.text = it.title
+                            binding.selectCategory.setText(it.title)
                             selectedCategoryId = it.id
                             dismiss()
                         })

@@ -15,7 +15,19 @@
         <item name="android:fontFamily">@font/font_ir_yekan_regular</item>
     </style>
 
-    <style name="AdPictureFade">
-        <item name="android:background">@drawable/shape_ad_picture_pager_fade_night</item>
+    <style name="Headline5" parent="BoldText">
+        <item name="android:textSize">20sp</item>
     </style>
+
+    <style name="ToolbarTitle" parent="BoldText">
+        <item name="android:textSize">17sp</item>
+    </style>
+
+    <style name="ClickableText" parent="Text">
+        <item name="android:clickable">true</item>
+        <item name="android:focusable">true</item>
+        <item name="android:background">?android:attr/selectableItemBackground</item>
+    </style>
+
+    <style name="UserProfileEmail" parent="Text"/>
 </resources>

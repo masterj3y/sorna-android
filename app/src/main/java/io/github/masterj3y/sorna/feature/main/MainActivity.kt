@@ -97,11 +97,11 @@ class MainActivity : BaseActivity<ActivityMainBinding>(), BaseFragment.FragmentN
 
     companion object {
 
-        private const val TAB_USER_PROFILE = FragNavController.TAB1
-        private const val TAB_CATEGORIES = FragNavController.TAB2
-        private const val TAB_CREATE_NEW_AD = FragNavController.TAB3
-        private const val TAB_SEARCH_ADS = FragNavController.TAB4
-        private const val TAB_ADS = FragNavController.TAB5
+        const val TAB_USER_PROFILE = FragNavController.TAB1
+        const val TAB_CATEGORIES = FragNavController.TAB2
+        const val TAB_CREATE_NEW_AD = FragNavController.TAB3
+        const val TAB_SEARCH_ADS = FragNavController.TAB4
+        const val TAB_ADS = FragNavController.TAB5
 
         private val tabs: HashMap<Int, Int> = hashMapOf(
                 TAB_USER_PROFILE to R.id.mainTabUserProfile,
