@@ -1,9 +1,6 @@
 package io.github.masterj3y.sorna.feature.ad
 
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
-import androidx.room.Query
+import androidx.room.*
 import kotlinx.coroutines.flow.Flow
 
 @Dao
@@ -28,11 +25,23 @@ interface AdsDao {
     fun findById(adId: String): Flow<Ad>
 
     @Query("UPDATE Ad SET saved = 1 WHERE id = :adId")
-    suspend fun save(adId: String)
+    suspend fun update(adId: String)
 
     @Query("UPDATE Ad SET saved = 0 WHERE id = :adId")
     suspend fun waste(adId: String)
 
     @Query("DELETE FROM ad WHERE id = :adId")
     suspend fun delete(adId: String)
+
+    @Query("DELETE FROM ad WHERE id NOT IN (SELECT id FROM ad WHERE id IN (:ids))")
+    suspend fun deleteByNotExist(ids: String)
+
+    @Transaction
+    suspend fun update(vararg ads: Ad) {
+        if (ads.isNotEmpty()) {
+            val ids: String = ads.map { "${it.id}," }.toString().run { substring(1, length - 3) }
+            deleteByNotExist(ids)
+            insert(*ads)
+        }
+    }
 }

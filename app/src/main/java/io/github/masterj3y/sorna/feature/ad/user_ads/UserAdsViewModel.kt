@@ -16,13 +16,17 @@ class UserAdsViewModel @ViewModelInject constructor(private val repository: AdsR
     private val getUserAds = MutableLiveData<Boolean>()
 
     @ExperimentalCoroutinesApi
-    val userAds: LiveData<List<Ad>> = getUserAds.switchMap {
+    private val _userAds: MutableLiveData<List<Ad>> = getUserAds.switchMap {
         loading()
         launchOnViewModelScope {
             loading()
             repository.getAllUserAds({ loading(false) }, ::error)
         }
-    }
+    } as MutableLiveData<List<Ad>>
+
+    @ExperimentalCoroutinesApi
+    val userAds: LiveData<List<Ad>>
+        get() = _userAds
 
     val loading = MutableLiveData(false)
     val error = MutableLiveData<String>()
@@ -31,8 +35,12 @@ class UserAdsViewModel @ViewModelInject constructor(private val repository: AdsR
         this.getUserAds.value = true
     }
 
+    @ExperimentalCoroutinesApi
     fun delete(adId: String) {
         viewModelScope.launch { repository.delete(adId, {}, {}) }
+        _userAds.value = _userAds.value?.toMutableList()?.apply {
+            remove(userAds.value?.first { it.id == adId })
+        }
     }
 
     private fun loading(loading: Boolean = true) {

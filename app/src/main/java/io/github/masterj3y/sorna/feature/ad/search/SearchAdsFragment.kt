@@ -11,12 +11,14 @@ import io.github.masterj3y.sorna.databinding.FragmentSearchAdsBinding
 import io.github.masterj3y.sorna.feature.ad.Ad
 import io.github.masterj3y.sorna.feature.ad.ads.AdsAdapter
 import io.github.masterj3y.sorna.feature.ad.details.AdDetailsActivity
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 
 @AndroidEntryPoint
 class SearchAdsFragment : BaseFragment<FragmentSearchAdsBinding>(R.layout.fragment_search_ads) {
 
     val model: SearchAdsViewModel by viewModels()
 
+    @ExperimentalCoroutinesApi
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -26,9 +28,11 @@ class SearchAdsFragment : BaseFragment<FragmentSearchAdsBinding>(R.layout.fragme
             viewModel = model
             recyclerView.addDividerItemDecoration()
             refreshLayout.setOnRefreshListener { refresh() }
+            retry.setOnClickListener { refresh() }
         }
     }
 
+    @ExperimentalCoroutinesApi
     private fun refresh() = with(binding) {
         input.text.toString().let { model.search(it) }
     }

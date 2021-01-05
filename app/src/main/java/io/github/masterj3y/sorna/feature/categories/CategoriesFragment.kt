@@ -24,6 +24,7 @@ class CategoriesFragment : BaseFragment<FragmentCategoriesBinding>(R.layout.frag
             viewModel = model.apply { getCategories() }
             recyclerView.addDividerItemDecoration()
             refreshLayout.setOnRefreshListener { model.getCategories() }
+            retry.setOnClickListener { model.getCategories() }
         }
     }
 

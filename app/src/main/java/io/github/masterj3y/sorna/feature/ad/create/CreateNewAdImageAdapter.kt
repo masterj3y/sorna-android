@@ -34,7 +34,7 @@ class CreateNewAdImageAdapter(
     }
 
     fun clear() {
-        list.clear()
+        list = initList()
         notifyDataSetChanged()
     }
 

@@ -55,4 +55,10 @@
     <string name="ad_details_call_to_ad_owner">تماس تلفنی</string>
     <string name="create_new_ad_toolbar_title">افزودن آگهی جدید</string>
     <string name="create_new_ad_images_error">برای آگهی حداقل 1 تصویر انتخاب کنید</string>
+    <string name="network_error_retry">تلاش مجدد</string>
+    <string name="ads_list_is_empty">در حال حاضر هیچ آگهی موجود نیست، اولین آگهی را شما منتشر کنید</string>
+    <string name="search_ads">قسمتی از عنوان یا توضیحات آگهی را وارد کنید</string>
+    <string name="search_ads_empty">متاسفانه چیزی پیدا نکردیم :(</string>
+    <string name="saved_ads_empty">شما تابحال هیچ آگهی را ذخیره نکردید</string>
+    <string name="user_ads_empty">شما تابحال هیچ آگهی را منتشر نکردید</string>
 </resources>

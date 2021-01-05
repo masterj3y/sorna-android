@@ -20,6 +20,7 @@ import io.github.masterj3y.sorna.feature.ad.user_ads.UserAdsFragment
 import io.github.masterj3y.sorna.feature.auth.AuthActivity
 import io.github.masterj3y.sorna.feature.categories.CategoriesFragment
 import io.github.masterj3y.sorna.feature.user_profile.UserProfileFragment
+import kotlinx.android.synthetic.main.activity_main.*
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -94,6 +95,10 @@ class MainActivity : BaseActivity<ActivityMainBinding>(), BaseFragment.FragmentN
     }
 
     override fun getFragNavigationController() = fragNavController
+
+    override fun switchTab(tab: Int) {
+        bottomNavigation.selectedItemId = requireNotNull(tabs[tab])
+    }
 
     companion object {
 

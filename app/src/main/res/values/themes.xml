@@ -85,6 +85,47 @@
         <item name="android:padding">8dp</item>
     </style>
 
+    <style name="DataState" parent="Text">
+        <item name="android:gravity">center</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:drawablePadding">8dp</item>
+    </style>
+
+    <style name="NetworkError" parent="DataState">
+        <item name="android:text">@string/network_error</item>
+        <item name="android:drawableTop">@drawable/ic_ils_error</item>
+        <item name="android:drawablePadding">32dp</item>
+    </style>
+
+    <style name="EmptyData" parent="DataState">
+        <item name="android:text">@string/ads_list_is_empty</item>
+        <item name="android:drawableTop">@drawable/ic_ils_empty</item>
+    </style>
+
+    <style name="SearchData" parent="DataState">
+        <item name="android:text">@string/search_ads</item>
+        <item name="android:drawableTop">@drawable/ic_ils_search</item>
+    </style>
+
+    <style name="EmptySearchData" parent="DataState">
+        <item name="android:text">@string/search_ads_empty</item>
+        <item name="android:drawableTop">@drawable/ic_ils_search_empty</item>
+    </style>
+
+    <style name="EmptySavedData" parent="DataState">
+        <item name="android:text">@string/saved_ads_empty</item>
+        <item name="android:drawableTop">@drawable/ic_ils_save</item>
+    </style>
+
+    <style name="EmptyUserData" parent="DataState">
+        <item name="android:text">@string/user_ads_empty</item>
+        <item name="android:drawableTop">@drawable/ic_ils_empty</item>
+    </style>
+
+    <style name="LoadingLayout">
+        <item name="android:background">#fff</item>
+    </style>
+
     <style name="AdImageLayout">
         <item name="android:background">@color/LightBlue_700</item>
     </style>

@@ -2,10 +2,12 @@ package io.github.masterj3y.sorna.core.platform
 
 import androidx.annotation.MainThread
 import androidx.annotation.WorkerThread
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.emitAll
+import kotlinx.coroutines.flow.flow
 import retrofit2.Response
+import java.io.IOException
 
 @ExperimentalCoroutinesApi
 abstract class CacheNetworkBoundRepository<RESULT, REQUEST>(
@@ -14,19 +16,22 @@ abstract class CacheNetworkBoundRepository<RESULT, REQUEST>(
 ) {
 
     fun asFlow() = flow {
-
-        emit(fetchFromLocal().first())
-        val apiResponse = fetchFromRemote()
-        val remoteData = apiResponse.body()
-        if (apiResponse.isSuccessful && remoteData != null) {
-            onSuccess()
-            saveRemoteData(remoteData)
-        } else {
-            onError(apiResponse.message())
+        try {
+            val apiResponse = fetchFromRemote()
+            val remoteData = apiResponse.body()
+            if (apiResponse.isSuccessful && remoteData != null) {
+                onSuccess()
+                saveRemoteData(remoteData)
+                emitAll(fetchFromLocal())
+            } else {
+                onError(apiResponse.message())
+            }
+        } catch (e: IOException) {
+            e.message?.let {
+                onError(it)
+                e.printStackTrace()
+            }
         }
-        emitAll(fetchFromLocal())
-    }.catch { e ->
-        e.message?.let { onError(it) }
     }
 
     @WorkerThread

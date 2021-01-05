@@ -2,11 +2,15 @@ package io.github.masterj3y.sorna.feature.ad.details
 
 import android.content.Context
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import androidx.activity.viewModels
 import com.skydoves.bundler.bundle
 import com.skydoves.bundler.intentOf
 import dagger.hilt.android.AndroidEntryPoint
 import io.github.masterj3y.sorna.R
+import io.github.masterj3y.sorna.core.extension.invisible
+import io.github.masterj3y.sorna.core.extension.visible
 import io.github.masterj3y.sorna.core.platform.BaseActivity
 import io.github.masterj3y.sorna.databinding.ActivityAdDetailsBinding
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -31,6 +35,10 @@ class AdDetailsActivity : BaseActivity<ActivityAdDetailsBinding>() {
                 viewModel = model.apply { getAd(adId) }
                 save.setOnClickListener { model.save(adId) }
                 waste.setOnClickListener { model.waste(adId) }
+                Handler(Looper.getMainLooper()).postDelayed({
+                    loadingLayout.invisible()
+                    call.visible()
+                }, 700)
             }
         }
     }

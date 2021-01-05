@@ -29,5 +29,9 @@
         <item name="android:background">?android:attr/selectableItemBackground</item>
     </style>
 
+    <style name="LoadingLayout">
+        <item name="android:background">@color/black</item>
+    </style>
+
     <style name="UserProfileEmail" parent="Text"/>
 </resources>

@@ -11,6 +11,7 @@ import kotlinx.coroutines.withContext
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import retrofit2.Response
+import java.io.IOException
 import javax.inject.Inject
 
 class AdsRepository @Inject constructor(private val service: AdService, private val appDatabase: AppDatabase) {
@@ -30,7 +31,7 @@ class AdsRepository @Inject constructor(private val service: AdService, private 
             vararg pics: MultipartBody.Part
     ) = networkRequest(
             onSuccess = {
-                saveAdsInDB(listOf(it))
+                saveAdsToLocal(listOf(it))
                 onSuccess()
             },
             onError = { onError(it) },
@@ -46,7 +47,7 @@ class AdsRepository @Inject constructor(private val service: AdService, private 
     ): Flow<List<Ad>> =
             object : CacheNetworkBoundRepository<List<Ad>, List<Ad>>(onSuccess, onError) {
 
-                override suspend fun saveRemoteData(response: List<Ad>) = saveAdsInDB(response)
+                override suspend fun saveRemoteData(response: List<Ad>) = updateLocalAds(response)
 
                 override fun fetchFromLocal(): Flow<List<Ad>> = fetchAdsFromLocal(adsDao.findAll())
 
@@ -62,7 +63,7 @@ class AdsRepository @Inject constructor(private val service: AdService, private 
     ): Flow<List<Ad>> =
             object : CacheNetworkBoundRepository<List<Ad>, List<Ad>>(onSuccess, onError) {
 
-                override suspend fun saveRemoteData(response: List<Ad>) = saveAdsInDB(response)
+                override suspend fun saveRemoteData(response: List<Ad>) = updateLocalAds(response)
 
                 override fun fetchFromLocal(): Flow<List<Ad>> =
                         fetchAdsFromLocal(adsDao.findAllByCategory(categoryId))
@@ -76,12 +77,7 @@ class AdsRepository @Inject constructor(private val service: AdService, private 
             onSuccess: () -> Unit,
             onError: (String) -> Unit
     ): Flow<List<Ad>> =
-            object : CacheNetworkBoundRepository<List<Ad>, List<Ad>>(onSuccess, onError) {
-
-                override suspend fun saveRemoteData(response: List<Ad>) = saveAdsInDB(response.map { it.copy(ownedByUser = true) })
-
-                override fun fetchFromLocal(): Flow<List<Ad>> = fetchAdsFromLocal(adsDao.findAllUserAds())
-
+            object : NetworkBoundRepository<List<Ad>>(onSuccess, onError) {
                 override suspend fun fetchFromRemote(): Response<List<Ad>> =
                         service.fetchAllUserAds()
             }.asFlow()
@@ -93,7 +89,7 @@ class AdsRepository @Inject constructor(private val service: AdService, private 
     ): Flow<List<Ad>> =
             object : CacheNetworkBoundRepository<List<Ad>, List<Ad>>(onSuccess, onError) {
 
-                override suspend fun saveRemoteData(response: List<Ad>) = saveAdsInDB(response)
+                override suspend fun saveRemoteData(response: List<Ad>) = updateLocalAds(response)
 
                 override fun fetchFromLocal(): Flow<List<Ad>> = fetchAdsFromLocal(adsDao.findAllSavedAds())
 
@@ -103,20 +99,23 @@ class AdsRepository @Inject constructor(private val service: AdService, private 
 
     @ExperimentalCoroutinesApi
     fun getAdById(adId: String): Flow<Ad> = flow {
-        val adFlow = adsDao.findById(adId).onEach {
-            val adPictures = adPicturesDao.findAllByAdId(it.id).first()
-            it.pics = adPictures
+        try {
+            val adFlow = adsDao.findById(adId).onEach {
+                val adPictures = adPicturesDao.findAllByAdId(it.id).first()
+                it.pics = adPictures
+            }
+            emitAll(adFlow)
+        } catch (e: IOException) {
         }
-        emitAll(adFlow)
     }
 
     @ExperimentalCoroutinesApi
-    fun searchAds(keyword: String, onSuccess: suspend () -> Unit, onError: suspend (String) -> Unit): Flow<List<Ad>> =
-        object : NetworkBoundRepository<List<Ad>>(onSuccess, onError) {
-            override suspend fun fetchFromRemote(): Response<List<Ad>> = service.searchAds(keyword)
-        }.asFlow()
+    fun searchAds(keyword: String, onSuccess:  () -> Unit, onError: (String) -> Unit): Flow<List<Ad>> =
+            object : NetworkBoundRepository<List<Ad>>(onSuccess, onError) {
+                override suspend fun fetchFromRemote(): Response<List<Ad>> = service.searchAds(keyword)
+            }.asFlow()
 
-    private suspend fun saveAdsInDB(ads: List<Ad>) {
+    private suspend fun saveAdsToLocal(ads: List<Ad>) {
         ads.forEach { ad ->
             ad.pics?.let { pics ->
                 pics.forEach { pic -> pic.adId = ad.id }
@@ -126,11 +125,21 @@ class AdsRepository @Inject constructor(private val service: AdService, private 
         adsDao.insert(*ads.toTypedArray())
     }
 
+    private suspend fun updateLocalAds(ads: List<Ad>) {
+        ads.forEach { ad ->
+            ad.pics?.let { pics ->
+                pics.forEach { pic -> pic.adId = ad.id }
+                adPicturesDao.insert(*pics.toTypedArray())
+            }
+        }
+        adsDao.update(*ads.toTypedArray())
+    }
+
     @ExperimentalCoroutinesApi
     suspend fun save(adId: String, onSuccess: (String) -> Unit, onError: (String) -> Unit) =
             networkRequest(
                     onSuccess = {
-                        adsDao.save(adId)
+                        adsDao.update(adId)
                         onSuccess(it)
                     },
                     onError = { onError(it) },

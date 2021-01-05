@@ -9,8 +9,7 @@ import android.widget.LinearLayout
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import io.github.masterj3y.sorna.R
 
-abstract class BaseBottomSheetDialog(context: Context) :
-    BottomSheetDialog(context, R.style.TransparentBottomSheetDialog) {
+abstract class BaseBottomSheetDialog(context: Context) : BottomSheetDialog(context) {
 
     abstract val dialogView: View
 

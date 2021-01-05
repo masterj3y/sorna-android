@@ -17,6 +17,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:animateLayoutChanges="true"
         android:orientation="vertical"
         tools:context=".feature.ad.saved_ads.SavedAdsFragment">
 
@@ -47,13 +48,62 @@
             android:layout_height="match_parent"
             android:refreshing="@{viewModel.loading}">
 
-            <androidx.recyclerview.widget.RecyclerView
+            <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:adapter="@{adapter}"
-                android:bindAdsList="@{viewModel.savedAds}"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                tools:listitem="@layout/item_ad" />
+                android:layout_height="match_parent">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recyclerView"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:adapter="@{adapter}"
+                    android:bindAdsList="@{viewModel.savedAds}"
+                    android:gone="@{viewModel.loading || viewModel.error != null}"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    tools:listitem="@layout/item_ad"
+                    tools:visibility="gone" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_margin="16dp"
+                    android:gone="@{viewModel.error==null}"
+                    android:orientation="vertical"
+                    android:visibility="gone"
+                    tools:visibility="invisible">
+
+                    <com.google.android.material.textview.MaterialTextView
+                        style="@style/NetworkError"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:drawablePadding="32dp" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/retry"
+                        style="@style/OutlinedButton"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="8dp"
+                        android:text="@string/network_error_retry" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_margin="16dp"
+                    android:gone="@{!viewModel.savedAds.empty || viewModel.error != null}"
+                    android:orientation="vertical"
+                    android:visibility="visible">
+
+                    <com.google.android.material.textview.MaterialTextView
+                        style="@style/EmptySavedData"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:drawablePadding="32dp" />
+                </LinearLayout>
+            </FrameLayout>
         </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
     </LinearLayout>
 </layout>

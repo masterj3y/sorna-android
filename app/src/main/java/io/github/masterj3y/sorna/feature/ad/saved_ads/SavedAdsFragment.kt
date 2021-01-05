@@ -5,6 +5,7 @@ import android.view.View
 import androidx.fragment.app.viewModels
 import dagger.hilt.android.AndroidEntryPoint
 import io.github.masterj3y.sorna.R
+import io.github.masterj3y.sorna.core.extension.addDividerItemDecoration
 import io.github.masterj3y.sorna.core.platform.BaseFragment
 import io.github.masterj3y.sorna.databinding.FragmentSavedAdsBinding
 import io.github.masterj3y.sorna.feature.ad.Ad
@@ -23,10 +24,12 @@ class SavedAdsFragment : BaseFragment<FragmentSavedAdsBinding>(R.layout.fragment
             lifecycleOwner = viewLifecycleOwner
             adapter = AdsAdapter(::onItemClicked)
             viewModel = model.apply { getSavedAds() }
+            recyclerView.addDividerItemDecoration()
             refreshLayout.setOnRefreshListener { model.getSavedAds() }
+            retry.setOnClickListener { model.getSavedAds() }
         }
     }
 
     private fun onItemClicked(item: Ad) =
-        AdDetailsActivity.start(requireContext(), item.id)
+            AdDetailsActivity.start(requireContext(), item.id)
 }

@@ -12,14 +12,13 @@ import androidx.fragment.app.Fragment
 import com.ncapdevi.fragnav.FragNavController
 
 abstract class BaseFragment<B : ViewDataBinding>(@LayoutRes private val layoutRes: Int) :
-    Fragment(layoutRes) {
+        Fragment(layoutRes) {
 
     lateinit var binding: B
 
     private lateinit var fragmentNavigation: FragmentNavigation
-    private val fragNavController: FragNavController by lazy {
-        fragmentNavigation.getFragNavigationController()
-    }
+    private val fragNavController: FragNavController
+        get() = fragmentNavigation.getFragNavigationController()
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -30,21 +29,22 @@ abstract class BaseFragment<B : ViewDataBinding>(@LayoutRes private val layoutRe
     }
 
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
+            inflater: LayoutInflater,
+            container: ViewGroup?,
+            savedInstanceState: Bundle?
     ): View? {
         binding = DataBindingUtil.inflate(layoutInflater, layoutRes, container, false)
         return binding.root
     }
 
-    fun pushFragment(fragment: Fragment)=
-        fragNavController.pushFragment(fragment)
+    fun pushFragment(fragment: Fragment) =
+            fragNavController.pushFragment(fragment)
 
-    fun switchTab(tab: Int) = fragNavController.switchTab(tab)
+    fun switchTab(tab: Int) = fragmentNavigation.switchTab(tab)
 
     interface FragmentNavigation {
         fun getFragNavigationController(): FragNavController
+        fun switchTab(tab: Int)
     }
 
     companion object {

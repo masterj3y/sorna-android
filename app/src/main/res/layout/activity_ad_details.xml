@@ -22,7 +22,8 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:animateLayoutChanges="true">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
@@ -174,7 +175,20 @@
                 android:layout_alignParentBottom="true"
                 android:layout_margin="16dp"
                 android:onClick="@{(view) -> viewModel.call(view, viewModel.ad.phoneNumber)}"
-                android:text="@string/ad_details_call_to_ad_owner" />
+                android:text="@string/ad_details_call_to_ad_owner"
+                android:visibility="gone" />
+
+            <FrameLayout
+                android:id="@+id/loadingLayout"
+                style="@style/LoadingLayout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <ProgressBar
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center" />
+            </FrameLayout>
         </RelativeLayout>
     </ScrollView>
 </layout>
