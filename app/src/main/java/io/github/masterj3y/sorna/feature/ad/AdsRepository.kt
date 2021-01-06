@@ -191,7 +191,7 @@ class AdsRepository @Inject constructor(private val service: AdService, private 
                 } else {
                     main { onError(response.message()) }
                 }
-            } catch (e: Exception) {
+            } catch (e: IOException) {
                 e.message?.let { main { onError(it) } }
             }
         }

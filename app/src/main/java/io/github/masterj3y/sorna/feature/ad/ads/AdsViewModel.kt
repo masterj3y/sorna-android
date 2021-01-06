@@ -34,7 +34,7 @@ class AdsViewModel @ViewModelInject constructor(
     }
 
     private fun loading(isLoading: Boolean = true) {
-        this.loading.value = isLoading
+        this.loading.postValue(isLoading)
     }
 
     private fun success() {

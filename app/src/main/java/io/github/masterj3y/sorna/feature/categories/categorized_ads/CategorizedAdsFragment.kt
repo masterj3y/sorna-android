@@ -33,6 +33,7 @@ class CategorizedAdsFragment : BaseFragment<FragmentCategorizedAdsBinding>(R.lay
             viewModel = model.apply { getCategorizedAds(categoryId) }
             recyclerView.addDividerItemDecoration()
             refreshLayout.setOnRefreshListener { model.getCategorizedAds(categoryId) }
+            retry.setOnClickListener { model.getCategorizedAds(categoryId) }
         }
     }
 

@@ -27,7 +27,7 @@ class CategoriesViewModel @ViewModelInject constructor(private val repository: C
     }
 
     private fun loading(isLoading: Boolean = true) {
-        this.loading.value = isLoading
+        this.loading.postValue(isLoading)
     }
 
     private fun error(message: String) {
