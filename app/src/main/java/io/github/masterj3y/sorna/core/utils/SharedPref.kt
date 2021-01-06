@@ -38,8 +38,15 @@ class SharedPref @Inject constructor(application: Application) {
         get() = getString(USER_PHOTO_URL to "Null")
         set(value) = put(USER_PHOTO_URL to value)
 
+    var nightModeEnabled: Boolean
+        get() = getBoolean(NIGHT_MODE_ENABLED to false)
+        set(value) = put(NIGHT_MODE_ENABLED to value)
+
     private fun getString(pair: Pair<String, String>): String =
             preferences.getString(pair.first, pair.second) ?: pair.second
+
+    private fun getBoolean(pair: Pair<String, Boolean>): Boolean =
+            preferences.getBoolean(pair.first, pair.second)
 
     private fun <T> put(data: Pair<String, T>) {
         when (data.second) {
@@ -52,7 +59,7 @@ class SharedPref @Inject constructor(application: Application) {
     }
 
     private fun edit(action: SharedPreferences.Editor.() -> Unit) =
-        preferences.edit { action() }
+            preferences.edit { action() }
 
     companion object {
         private const val ACCESS_TOKEN = "at"
@@ -61,5 +68,6 @@ class SharedPref @Inject constructor(application: Application) {
         private const val USER_DISPLAY_NAME = "user_display_name"
         private const val USER_EMAIL_ADDRESS = "user_email_address"
         private const val USER_PHOTO_URL = "user_photo_url"
+        private const val NIGHT_MODE_ENABLED = "night_mode_enabled"
     }
 }

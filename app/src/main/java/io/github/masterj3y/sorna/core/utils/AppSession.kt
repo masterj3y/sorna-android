@@ -2,10 +2,7 @@ package io.github.masterj3y.sorna.core.utils
 
 import android.app.Activity
 import android.net.Uri
-import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
-import com.google.android.gms.auth.api.signin.GoogleSignInOptions
-import io.github.masterj3y.sorna.core.AppBase
 import io.github.masterj3y.sorna.feature.auth.AuthActivity
 import io.github.masterj3y.sorna.feature.user_profile.UserProfile
 import javax.inject.Inject
@@ -64,6 +61,12 @@ class AppSession @Inject constructor(
         get() = Uri.parse(sharedPref.userPhotoUrl)
         set(value) {
             sharedPref.userPhotoUrl = value.toString()
+        }
+
+    var nightModeEnabled: Boolean
+        get() = sharedPref.nightModeEnabled
+        set(value) {
+            sharedPref.nightModeEnabled = value
         }
 
     fun login(accessToken: String) {

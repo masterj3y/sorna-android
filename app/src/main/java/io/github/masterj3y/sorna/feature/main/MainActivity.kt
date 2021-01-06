@@ -11,23 +11,17 @@ import dagger.hilt.android.AndroidEntryPoint
 import io.github.masterj3y.sorna.R
 import io.github.masterj3y.sorna.core.platform.BaseActivity
 import io.github.masterj3y.sorna.core.platform.BaseFragment
-import io.github.masterj3y.sorna.core.utils.AppSession
 import io.github.masterj3y.sorna.databinding.ActivityMainBinding
 import io.github.masterj3y.sorna.feature.ad.ads.AdsFragment
 import io.github.masterj3y.sorna.feature.ad.create.CreateNewAdFragment
 import io.github.masterj3y.sorna.feature.ad.search.SearchAdsFragment
-import io.github.masterj3y.sorna.feature.ad.user_ads.UserAdsFragment
 import io.github.masterj3y.sorna.feature.auth.AuthActivity
 import io.github.masterj3y.sorna.feature.categories.CategoriesFragment
 import io.github.masterj3y.sorna.feature.user_profile.UserProfileFragment
 import kotlinx.android.synthetic.main.activity_main.*
-import javax.inject.Inject
 
 @AndroidEntryPoint
 class MainActivity : BaseActivity<ActivityMainBinding>(), BaseFragment.FragmentNavigation {
-
-    @Inject
-    lateinit var appSession: AppSession
 
     private val fragNavController: FragNavController by lazy {
         FragNavController(supportFragmentManager, R.id.tabContainer)

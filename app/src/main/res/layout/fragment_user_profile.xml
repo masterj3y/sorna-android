@@ -104,6 +104,36 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
+            android:text="@string/app_settings" />
+
+        <FrameLayout
+            android:id="@+id/nightModeLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.google.android.material.textview.MaterialTextView
+                style="@style/ProfileOption"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start|center_vertical"
+                android:drawableStart="@drawable/ic_baseline_bedtime_24"
+                android:text="@string/saved_ads" />
+
+            <com.google.android.material.switchmaterial.SwitchMaterial
+                android:id="@+id/nightMode"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end|center_vertical"
+                android:layout_marginEnd="16dp" />
+        </FrameLayout>
+
+        <com.google.android.material.textview.MaterialTextView
+            style="@style/Headline5"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
             android:text="@string/user_account" />
 
         <com.google.android.material.textview.MaterialTextView

@@ -9,10 +9,12 @@ import io.github.masterj3y.sorna.core.utils.AppSession
 import io.github.masterj3y.sorna.databinding.FragmentUserProfileBinding
 import io.github.masterj3y.sorna.feature.ad.saved_ads.SavedAdsFragment
 import io.github.masterj3y.sorna.feature.ad.user_ads.UserAdsFragment
+import io.github.masterj3y.sorna.feature.main.MainActivity
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class UserProfileFragment : BaseFragment<FragmentUserProfileBinding>(R.layout.fragment_user_profile) {
+class UserProfileFragment :
+    BaseFragment<FragmentUserProfileBinding>(R.layout.fragment_user_profile) {
 
     @Inject
     lateinit var appSession: AppSession
@@ -24,8 +26,16 @@ class UserProfileFragment : BaseFragment<FragmentUserProfileBinding>(R.layout.fr
             userProfile = appSession.userProfile
             userAds.setOnClickListener { openUserAds() }
             savedAds.setOnClickListener { openSavedAds() }
+            nightModeLayout.setOnClickListener { nightMode.toggle() }
+            nightMode.setOnCheckedChangeListener { _, isChecked -> switchNightMode(isChecked) }
+            nightMode.isChecked = appSession.nightModeEnabled
             logout.setOnClickListener { appSession.logout(requireActivity()) }
         }
+    }
+
+    private fun switchNightMode(isNightMode: Boolean) {
+        switchTab(MainActivity.TAB_ADS)
+        toggleNightMode(isNightMode)
     }
 
     private fun openUserAds() = pushFragment(UserAdsFragment())

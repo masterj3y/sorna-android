@@ -61,4 +61,5 @@
     <string name="search_ads_empty">متاسفانه چیزی پیدا نکردیم :(</string>
     <string name="saved_ads_empty">شما تابحال هیچ آگهی را ذخیره نکردید</string>
     <string name="user_ads_empty">شما تابحال هیچ آگهی را منتشر نکردید</string>
+    <string name="app_settings">تنظیمات برنامه</string>
 </resources>
