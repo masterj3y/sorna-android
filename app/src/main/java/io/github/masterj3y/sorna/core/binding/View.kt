@@ -10,10 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.floatingactionbutton.FloatingActionButton
-import io.github.masterj3y.sorna.core.extension.loadCircularFromUri
-import io.github.masterj3y.sorna.core.extension.loadCircularFromUrl
-import io.github.masterj3y.sorna.core.extension.loadFromUri
-import io.github.masterj3y.sorna.core.extension.loadFromUrl
+import io.github.masterj3y.sorna.core.extension.*
 import java.text.DecimalFormat
 
 @BindingAdapter("android:loadImageFromUrl")
@@ -27,8 +24,13 @@ fun loadCircularImageFromUrl(view: ImageView, url: String?) {
 }
 
 @BindingAdapter("android:loadCircularImageFromUri")
-fun loadCircularImageFromUri(view: ImageView, url: Uri?) {
-    url?.let { view.loadCircularFromUri(it) }
+fun loadCircularImageFromUri(view: ImageView, uri: Uri?) {
+    uri?.let { view.loadCircularFromUri(it) }
+}
+
+@BindingAdapter("android:loadUserProfile")
+fun loadUserProfile(view: ImageView, uri: Uri?) {
+    uri?.let { view.loadUserProfile(uri) }
 }
 
 @BindingAdapter("android:loadImageFromUri")

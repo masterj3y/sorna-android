@@ -48,16 +48,10 @@ class UserProfileFragment :
         title(R.string.app_language)
         items = listOf(
             ActionDialogItem(text = getString(R.string.app_language_persian)) {
-                changeLanguage(
-                    this,
-                    PERSIAN
-                )
+                changeLanguage(this, PERSIAN)
             },
             ActionDialogItem(text = getString(R.string.app_language_english)) {
-                changeLanguage(
-                    this,
-                    ENGLISH
-                )
+                changeLanguage(this, ENGLISH)
             }
         )
     }.show()

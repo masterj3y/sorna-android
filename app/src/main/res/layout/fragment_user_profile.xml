@@ -36,9 +36,10 @@
                         android:id="@+id/photo"
                         android:layout_width="120dp"
                         android:layout_height="120dp"
-                        android:loadCircularImageFromUri="@{userProfile.photoUrl}"
+                        android:loadUserProfile="@{userProfile.photoUrl}"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:src="@drawable/ic_user_profile_placeholder" />
 
                     <LinearLayout
                         android:layout_width="0dp"

@@ -37,13 +37,26 @@ fun ImageView.loadCircularFromUrl(
 }
 
 fun ImageView.loadCircularFromUri(
-        url: Uri,
-        vararg transformations: Transformation<Bitmap> = arrayOf()
+    url: Uri,
+    vararg transformations: Transformation<Bitmap> = arrayOf()
 ) {
     Glide.with(context)
-            .load(url)
-            .transform(*transformations)
-            .circleCrop()
-            .transition(DrawableTransitionOptions.withCrossFade())
-            .into(this)
+        .load(url)
+        .transform(*transformations)
+        .circleCrop()
+        .transition(DrawableTransitionOptions.withCrossFade())
+        .into(this)
+}
+
+fun ImageView.loadUserProfile(
+    url: Uri,
+    vararg transformations: Transformation<Bitmap> = arrayOf()
+) {
+    Glide.with(context)
+        .load(url)
+        .placeholder(R.drawable.ic_user_profile_placeholder)
+        .transform(*transformations)
+        .circleCrop()
+        .transition(DrawableTransitionOptions.withCrossFade())
+        .into(this)
 }
