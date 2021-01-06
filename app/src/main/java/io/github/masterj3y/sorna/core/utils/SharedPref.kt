@@ -9,7 +9,7 @@ import javax.inject.Inject
 class SharedPref @Inject constructor(application: Application) {
 
     private val preferences: SharedPreferences =
-            application.getSharedPreferences("pref", Context.MODE_PRIVATE)
+        application.getSharedPreferences("pref", Context.MODE_PRIVATE)
 
     val isLoggedIn: Boolean
         get() = accessToken.isNotEmpty()
@@ -42,11 +42,15 @@ class SharedPref @Inject constructor(application: Application) {
         get() = getBoolean(NIGHT_MODE_ENABLED to false)
         set(value) = put(NIGHT_MODE_ENABLED to value)
 
+    var appLanguage: String
+        get() = getString(APP_LANGUAGE to "fa")
+        set(value) = put(APP_LANGUAGE to value)
+
     private fun getString(pair: Pair<String, String>): String =
-            preferences.getString(pair.first, pair.second) ?: pair.second
+        preferences.getString(pair.first, pair.second) ?: pair.second
 
     private fun getBoolean(pair: Pair<String, Boolean>): Boolean =
-            preferences.getBoolean(pair.first, pair.second)
+        preferences.getBoolean(pair.first, pair.second)
 
     private fun <T> put(data: Pair<String, T>) {
         when (data.second) {
@@ -59,7 +63,7 @@ class SharedPref @Inject constructor(application: Application) {
     }
 
     private fun edit(action: SharedPreferences.Editor.() -> Unit) =
-            preferences.edit { action() }
+        preferences.edit { action() }
 
     companion object {
         private const val ACCESS_TOKEN = "at"
@@ -69,5 +73,6 @@ class SharedPref @Inject constructor(application: Application) {
         private const val USER_EMAIL_ADDRESS = "user_email_address"
         private const val USER_PHOTO_URL = "user_photo_url"
         private const val NIGHT_MODE_ENABLED = "night_mode_enabled"
+        private const val APP_LANGUAGE = "APP_LANGUAGE"
     }
 }

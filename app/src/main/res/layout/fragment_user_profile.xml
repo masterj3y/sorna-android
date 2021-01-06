@@ -10,139 +10,160 @@
             type="io.github.masterj3y.sorna.feature.user_profile.UserProfile" />
     </data>
 
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:fillViewport="true">
 
-        <com.google.android.material.appbar.AppBarLayout
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
-            <androidx.constraintlayout.widget.ConstraintLayout
+            <com.google.android.material.appbar.AppBarLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingStart="16dp"
-                android:paddingTop="32dp"
-                android:paddingEnd="16dp"
-                android:paddingBottom="32dp">
+                android:layout_height="wrap_content">
 
-                <androidx.appcompat.widget.AppCompatImageView
-                    android:id="@+id/photo"
-                    android:layout_width="120dp"
-                    android:layout_height="120dp"
-                    android:loadCircularImageFromUri="@{userProfile.photoUrl}"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <LinearLayout
-                    android:layout_width="0dp"
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:orientation="vertical"
-                    app:layout_constraintBottom_toBottomOf="@id/photo"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@id/photo"
-                    app:layout_constraintTop_toTopOf="@id/photo">
+                    android:paddingStart="16dp"
+                    android:paddingTop="32dp"
+                    android:paddingEnd="16dp"
+                    android:paddingBottom="32dp">
 
-                    <com.google.android.material.textview.MaterialTextView
-                        style="@style/ToolbarTitle"
-                        android:layout_width="wrap_content"
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/photo"
+                        android:layout_width="120dp"
+                        android:layout_height="120dp"
+                        android:loadCircularImageFromUri="@{userProfile.photoUrl}"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <LinearLayout
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:singleLine="true"
-                        android:text="@{userProfile.displayName}"
-                        tools:text="Mohammad Jahangiry" />
+                        android:layout_marginStart="16dp"
+                        android:orientation="vertical"
+                        app:layout_constraintBottom_toBottomOf="@id/photo"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/photo"
+                        app:layout_constraintTop_toTopOf="@id/photo">
 
-                    <com.google.android.material.textview.MaterialTextView
-                        style="@style/UserProfileEmail"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:singleLine="true"
-                        android:text="@{userProfile.emailAddress}"
-                        tools:text="mjahangiry75@gmail.com" />
-                </LinearLayout>
-            </androidx.constraintlayout.widget.ConstraintLayout>
-        </com.google.android.material.appbar.AppBarLayout>
+                        <com.google.android.material.textview.MaterialTextView
+                            style="@style/ToolbarTitle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:singleLine="true"
+                            android:text="@{userProfile.displayName}"
+                            tools:text="Mohammad Jahangiry" />
 
-        <com.google.android.material.textview.MaterialTextView
-            style="@style/Headline5"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="16dp"
-            android:text="@string/user_advertisements" />
-
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/userAds"
-            style="@style/ProfileOption"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:drawableStart="@drawable/ic_baseline_folder_shared_24"
-            android:drawableEnd="@drawable/ic_baseline_chevron_right_24"
-            android:text="@string/profile_user_ads" />
-
-        <View
-            style="@style/VerticalDivider"
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginStart="16dp" />
-
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/savedAds"
-            style="@style/ProfileOption"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:drawableStart="@drawable/ic_baseline_bookmark_24"
-            android:drawableEnd="@drawable/ic_baseline_chevron_right_24"
-            android:text="@string/saved_ads" />
-
-        <com.google.android.material.textview.MaterialTextView
-            style="@style/Headline5"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="16dp"
-            android:text="@string/app_settings" />
-
-        <FrameLayout
-            android:id="@+id/nightModeLayout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+                        <com.google.android.material.textview.MaterialTextView
+                            style="@style/UserProfileEmail"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:singleLine="true"
+                            android:text="@{userProfile.emailAddress}"
+                            tools:text="mjahangiry75@gmail.com" />
+                    </LinearLayout>
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </com.google.android.material.appbar.AppBarLayout>
 
             <com.google.android.material.textview.MaterialTextView
+                style="@style/Headline5"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:text="@string/user_advertisements" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/userAds"
                 style="@style/ProfileOption"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="start|center_vertical"
-                android:drawableStart="@drawable/ic_baseline_bedtime_24"
+                android:drawableStart="@drawable/ic_baseline_folder_shared_24"
+                android:drawableEnd="@drawable/ic_baseline_chevron_right_24"
+                android:text="@string/profile_user_ads" />
+
+            <View
+                style="@style/VerticalDivider"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginStart="16dp" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/savedAds"
+                style="@style/ProfileOption"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawableStart="@drawable/ic_baseline_bookmark_24"
+                android:drawableEnd="@drawable/ic_baseline_chevron_right_24"
                 android:text="@string/saved_ads" />
 
-            <com.google.android.material.switchmaterial.SwitchMaterial
-                android:id="@+id/nightMode"
-                android:layout_width="wrap_content"
+            <com.google.android.material.textview.MaterialTextView
+                style="@style/Headline5"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="end|center_vertical"
-                android:layout_marginEnd="16dp" />
-        </FrameLayout>
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:text="@string/app_settings" />
 
-        <com.google.android.material.textview.MaterialTextView
-            style="@style/Headline5"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="16dp"
-            android:text="@string/user_account" />
+            <FrameLayout
+                android:id="@+id/nightModeLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/logout"
-            style="@style/ProfileOption"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:drawableStart="@drawable/ic_baseline_exit_to_app_24"
-            android:drawableEnd="@drawable/ic_baseline_chevron_right_24"
-            android:text="@string/log_out" />
-    </LinearLayout>
+                <com.google.android.material.textview.MaterialTextView
+                    style="@style/ProfileOption"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start|center_vertical"
+                    android:drawableStart="@drawable/ic_baseline_bedtime_24"
+                    android:text="@string/night_mode" />
+
+                <com.google.android.material.switchmaterial.SwitchMaterial
+                    android:id="@+id/nightMode"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end|center_vertical"
+                    android:layout_marginEnd="16dp" />
+            </FrameLayout>
+
+            <View
+                style="@style/VerticalDivider"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginStart="16dp" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/changeAppLanguage"
+                style="@style/ProfileOption"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawableStart="@drawable/ic_baseline_language_24"
+                android:drawableEnd="@drawable/ic_baseline_chevron_right_24"
+                android:text="@string/app_language" />
+
+            <com.google.android.material.textview.MaterialTextView
+                style="@style/Headline5"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:text="@string/user_account" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/logout"
+                style="@style/ProfileOption"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawableStart="@drawable/ic_baseline_exit_to_app_24"
+                android:drawableEnd="@drawable/ic_baseline_chevron_right_24"
+                android:text="@string/log_out" />
+        </LinearLayout>
+    </ScrollView>
 </layout>

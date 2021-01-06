@@ -4,10 +4,12 @@ import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.switchMap
+import androidx.lifecycle.viewModelScope
 import io.github.masterj3y.sorna.core.platform.BaseViewModel
 import io.github.masterj3y.sorna.feature.ad.Ad
 import io.github.masterj3y.sorna.feature.ad.AdsRepository
 import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.cancel
 
 class SearchAdsViewModel @ViewModelInject constructor(private val repository: AdsRepository) : BaseViewModel() {
 
@@ -31,8 +33,10 @@ class SearchAdsViewModel @ViewModelInject constructor(private val repository: Ad
     fun search(s: CharSequence, start: Int = 0, before: Int = 0, count: Int = 0) {
         if (s.isNotBlank())
             keyword.value = s.toString()
-        else
+        else {
             this._searchResultAds.value = listOf()
+            viewModelScope.cancel()
+        }
     }
 
     private fun loading(isLoading: Boolean = true) {

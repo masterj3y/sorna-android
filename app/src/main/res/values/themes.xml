@@ -122,6 +122,11 @@
         <item name="android:drawableTop">@drawable/ic_ils_empty</item>
     </style>
 
+    <style name="EmptyCategorizedData" parent="DataState">
+        <item name="android:text">@string/categorized_ads_empty</item>
+        <item name="android:drawableTop">@drawable/ic_ils_empty</item>
+    </style>
+
     <style name="LoadingLayout">
         <item name="android:background">#fff</item>
     </style>
