@@ -8,7 +8,7 @@ Using Sorna, users can post sale ad of their own second
   they must deal together locally out of the app.
 
 | | | |
-|:-------------------------:|:-------------------------:|:-------------------------:|
+|:-------------------------:|:-------------------------:|:-------------------------:|:-------------------------:|
 |<img width="1604" src="previews/1.jpeg"> | <img width="1604" src="previews/2.jpeg"> |<img width="1604" src="previews/3.jpeg"> | <img width="1604" src="previews/4.jpeg"> | 
 |<img width="1604" src="previews/5.jpeg"> |<img width="1604" src="previews/6.jpeg"> | <img width="1604" src="previews/7.jpeg"> |<img width="1604" src="previews/8.jpeg"> |
 
