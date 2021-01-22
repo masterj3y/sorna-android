@@ -1,6 +1,6 @@
-##Sorna
+## Sorna
 An app that allows users to buy from and sell to with others locally
-##Summary
+## Summary
 Using Sorna, users can post sale ad of their own second
   hand goods like phones, televisions, carpets or
   everything people can buy from a shop but here
