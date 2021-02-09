@@ -18,6 +18,8 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        buildConfigField("String", "BASE_URL", getBaseURL())
     }
 
     buildTypes {
@@ -37,6 +39,13 @@ android {
     buildFeatures {
         dataBinding true
     }
+}
+
+String getBaseURL() {
+    def propFile = rootProject.file("./local.properties")
+    def properties = new Properties()
+    properties.load(new FileInputStream(propFile))
+    return properties['BASE_URL']
 }
 
 dependencies {

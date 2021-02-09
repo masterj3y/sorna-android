@@ -4,6 +4,7 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ApplicationComponent
+import io.github.masterj3y.sorna.BuildConfig
 import io.github.masterj3y.sorna.core.utils.AppSession
 import io.github.masterj3y.sorna.feature.ad.AdService
 import io.github.masterj3y.sorna.feature.auth.AuthInterceptor
@@ -18,8 +19,6 @@ import javax.inject.Singleton
 @Module
 @InstallIn(ApplicationComponent::class)
 object NetworkModule {
-
-    const val BASE_URL = "http://192.168.1.103:8080/"
 
     @Provides
     @Singleton
@@ -40,7 +39,7 @@ object NetworkModule {
     @Singleton
     fun retrofit(okHttpClient: OkHttpClient): Retrofit {
         return Retrofit.Builder().client(okHttpClient)
-                .baseUrl(BASE_URL)
+                .baseUrl(BuildConfig.BASE_URL)
                 .addConverterFactory(ScalarsConverterFactory.create())
                 .addConverterFactory(GsonConverterFactory.create()).build()
     }
