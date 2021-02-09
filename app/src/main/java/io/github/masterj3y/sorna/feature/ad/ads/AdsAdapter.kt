@@ -5,10 +5,8 @@ import android.widget.ImageView
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.load.resource.bitmap.RoundedCorners
+import io.github.masterj3y.sorna.BuildConfig
 import io.github.masterj3y.sorna.R
-import io.github.masterj3y.sorna.core.di.NetworkModule
-import io.github.masterj3y.sorna.core.extension.dpToPx
 import io.github.masterj3y.sorna.core.extension.inflate
 import io.github.masterj3y.sorna.core.extension.loadFromUrl
 import io.github.masterj3y.sorna.core.platform.DiffCallBack
@@ -16,17 +14,18 @@ import io.github.masterj3y.sorna.databinding.ItemAdBinding
 import io.github.masterj3y.sorna.feature.ad.Ad
 import io.github.masterj3y.sorna.feature.ad.AdPicture
 
-class AdsAdapter(private val listener: OnItemClickedListener) : RecyclerView.Adapter<AdsAdapter.AdsViewHolder>() {
+class AdsAdapter(private val listener: OnItemClickedListener) :
+    RecyclerView.Adapter<AdsAdapter.AdsViewHolder>() {
 
     private val differ = AsyncListDiffer(this, DiffCallBack<Ad>())
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
-            AdsViewHolder(
-                    ItemAdBinding.bind(parent.inflate(R.layout.item_ad))
-            )
+        AdsViewHolder(
+            ItemAdBinding.bind(parent.inflate(R.layout.item_ad))
+        )
 
     override fun onBindViewHolder(holder: AdsViewHolder, position: Int) =
-            holder.render(differ.currentList[position])
+        holder.render(differ.currentList[position])
 
     override fun getItemCount(): Int = differ.currentList.size
 
@@ -34,7 +33,8 @@ class AdsAdapter(private val listener: OnItemClickedListener) : RecyclerView.Ada
         differ.submitList(newList)
     }
 
-    inner class AdsViewHolder(private val binding: ItemAdBinding) : RecyclerView.ViewHolder(binding.root) {
+    inner class AdsViewHolder(private val binding: ItemAdBinding) :
+        RecyclerView.ViewHolder(binding.root) {
 
         fun render(item: Ad) = with(binding) {
             ad = item
@@ -60,7 +60,7 @@ fun loadAdFirstPic(view: ImageView, pics: List<AdPicture>?) = with(view) {
     }
 }
 
-fun String.absolutePicUrl() =NetworkModule.BASE_URL + replace("\\", "/")
+fun String.absolutePicUrl() = BuildConfig.BASE_URL + replace("\\", "/")
 
 @BindingAdapter("android:bindAdsList")
 fun bindAdsList(view: RecyclerView, list: List<Ad>?) {

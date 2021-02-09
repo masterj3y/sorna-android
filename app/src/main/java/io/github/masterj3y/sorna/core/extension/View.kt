@@ -3,11 +3,9 @@ package io.github.masterj3y.sorna.core.extension
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.animation.OvershootInterpolator
 import androidx.annotation.LayoutRes
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.RecyclerView
-import jp.wasabeef.recyclerview.animators.SlideInUpAnimator
 
 fun ViewGroup.inflate(@LayoutRes layoutRes: Int): View =
     LayoutInflater.from(context).inflate(layoutRes, this, false)
@@ -26,13 +24,6 @@ fun View.invisible() {
 
 fun View.gone() {
     visibility = View.GONE
-}
-
-fun itemAnimator() = SlideInUpAnimator(OvershootInterpolator(1f)).apply {
-    addDuration = 300
-    removeDuration = 300
-    moveDuration = 300
-    changeDuration = 300
 }
 
 fun RecyclerView.addDividerItemDecoration() {
