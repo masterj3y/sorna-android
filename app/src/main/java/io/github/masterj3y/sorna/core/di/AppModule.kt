@@ -25,7 +25,6 @@ object AppModule {
     @Singleton
     fun provideGoogleSignInOptions(): GoogleSignInOptions =
             GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                    .requestIdToken("809003685834-bqkuodq77dkn38iur2u4ii1ocggrbf8o.apps.googleusercontent.com")
                     .requestEmail()
                     .build()
 }
