@@ -9,6 +9,7 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ApplicationComponent
 import dagger.hilt.android.qualifiers.ApplicationContext
+import io.github.masterj3y.sorna.BuildConfig
 import javax.inject.Singleton
 
 @Module
@@ -25,6 +26,7 @@ object AppModule {
     @Singleton
     fun provideGoogleSignInOptions(): GoogleSignInOptions =
             GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                    .requestIdToken(BuildConfig.GOOGLE_REQUEST_ID_TOKEN)
                     .requestEmail()
                     .build()
 }
