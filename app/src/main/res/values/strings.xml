@@ -22,7 +22,6 @@
     <string name="storage_permission_grant">Grant Permission</string>
     <string name="storage_permission_deny">Dismiss</string>
     <string name="create_new_ad_post_button">Post Ad</string>
-    <string name="create_new_ad_posting_ad">Posting Ad, please wait</string>
     <string name="create_new_ad_successful">Ad posted successfully</string>
     <string name="create_new_ad_failed">Error posting ad, please try again later</string>
     <string name="create_new_ad_price">Price</string>
@@ -31,7 +30,6 @@
     <string name="time_to_moment_some_minutes_ago">%1$d minutes</string>
     <string name="time_to_moment_one_hour_ago">One hour ago</string>
     <string name="time_to_moment_some_hours_ago">%1$d hours</string>
-    <string name="time_to_moment_yesterday">yesterday</string>
     <string name="time_to_moment_some_days_ago">%1$d days</string>
     <string name="search_ads_input_hint">Search Ads</string>
     <string name="profile_user_ads">My Ads</string>
@@ -60,7 +58,6 @@
     <string name="search_ads">Input part of Ad title or description</string>
     <string name="search_ads_empty">Sorry, nothing found</string>
     <string name="saved_ads_empty">You have not sent any Ads yet</string>
-    <string name="user_ads_empty">You have not saved any Ads yet</string>
     <string name="app_settings">App Settings</string>
     <string name="categorized_ads_empty">There is no Ad for this Category</string>
     <string name="app_language">Application Language</string>

@@ -53,7 +53,6 @@ dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     implementation "androidx.appcompat:appcompat:$appcompat_version"
     implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
-    implementation 'androidx.dynamicanimation:dynamicanimation:1.0.0'
     implementation 'com.google.android.material:material:1.2.1'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
 
@@ -78,11 +77,6 @@ dependencies {
     def liveData  = '2.2.0'
     implementation "androidx.lifecycle:lifecycle-livedata-ktx:$liveData"
 
-    def firebaseMessaging = '21.0.0'
-    implementation "com.google.firebase:firebase-messaging:$firebaseMessaging"
-
-    def lottie = '2.8.0'
-    implementation "com.airbnb.android:lottie:$lottie"
 
     def daggerVersion = '2.29.1'
     def daggerHiltAndroidVersion = '2.29.1-alpha'
@@ -118,15 +112,6 @@ dependencies {
 
     def fragNavController = '3.2.0'
     implementation "com.ncapdevi:frag-nav:$fragNavController"
-
-    def itemAnimator = '3.0.0'
-    implementation "jp.wasabeef:recyclerview-animators:$itemAnimator"
-
-    def bubbleShowCase = '1.3.1'
-    implementation "com.elconfidencial.bubbleshowcase:bubbleshowcase:$bubbleShowCase"
-
-    def circleIndicator = '2.1.4'
-    implementation "me.relex:circleindicator:$circleIndicator"
 
     def bundler = '1.0.2'
     implementation "com.github.skydoves:bundler:$bundler"

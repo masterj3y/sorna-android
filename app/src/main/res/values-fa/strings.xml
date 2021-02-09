@@ -22,7 +22,6 @@
     <string name="storage_permission_grant">اعطای دسترسی</string>
     <string name="storage_permission_deny">بیخیال</string>
     <string name="create_new_ad_post_button">ارسال آگهی</string>
-    <string name="create_new_ad_posting_ad">در حال ارسال آگهی، لطفا صبر کنید</string>
     <string name="create_new_ad_successful">آگهی با موفقیت ارسال شد</string>
     <string name="create_new_ad_failed">ارسال آگهی با خطا مواجه شد، لطفا دوباره تلاش کنید</string>
     <string name="create_new_ad_price">قیمت</string>
@@ -31,7 +30,6 @@
     <string name="time_to_moment_some_minutes_ago">%1$d دقیقه</string>
     <string name="time_to_moment_one_hour_ago">یک ساعت پیش</string>
     <string name="time_to_moment_some_hours_ago">%1$d ساعت پیش</string>
-    <string name="time_to_moment_yesterday">دیروز</string>
     <string name="time_to_moment_some_days_ago">%1$d روز پیش</string>
     <string name="search_ads_input_hint">جستجوی آگهی</string>
     <string name="profile_user_ads">آگهی‌های من</string>
@@ -60,7 +58,6 @@
     <string name="search_ads">قسمتی از عنوان یا توضیحات آگهی را وارد کنید</string>
     <string name="search_ads_empty">متاسفانه چیزی پیدا نکردیم :(</string>
     <string name="saved_ads_empty">شما تابحال هیچ آگهی را ذخیره نکردید</string>
-    <string name="user_ads_empty">شما تابحال هیچ آگهی را منتشر نکردید</string>
     <string name="app_settings">تنظیمات برنامه</string>
     <string name="categorized_ads_empty">هیچ آگهی برای این دسته‌بندی وجود ندارد</string>
     <string name="app_language">زبان برنامه</string>
