@@ -8,12 +8,15 @@ import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import io.github.masterj3y.sorna.core.platform.BaseViewModel
 import io.github.masterj3y.sorna.core.utils.AppSession
 import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.cancel
 import kotlinx.coroutines.launch
 
 class AuthViewModel @ViewModelInject constructor(
         private val repository: AuthRepository,
         private val appSession: AppSession) : BaseViewModel() {
+
+    private var loginJob: Job? = null
 
     val loading = MutableLiveData(false)
     val error = MutableLiveData("")
@@ -25,7 +28,7 @@ class AuthViewModel @ViewModelInject constructor(
     fun signIn(account: GoogleSignInAccount) {
         account.idToken?.let { idToken ->
             loading()
-            viewModelScope.launch {
+            loginJob = viewModelScope.launch {
                 repository.signIn(googleIdToken = idToken, onSuccess = ::onSuccess, onError = ::onError)
             }
         }
@@ -33,7 +36,7 @@ class AuthViewModel @ViewModelInject constructor(
     }
 
     fun cancelSignIn() {
-        viewModelScope.cancel()
+        loginJob?.cancel()
         loading(false)
     }
 
